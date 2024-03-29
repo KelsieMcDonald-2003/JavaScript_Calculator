@@ -1,13 +1,13 @@
 # JavaScript_Calculator
  This is a simple JavaScript Calculator. There are two versions.
- ##Version 1:
+ ## Version 1:
  * Uses:
    - Input Fields (document.getElementById("result"))
    - Key Presses (handleKeyPress(event))
    - Evalutation (math.evaluate(x))
 
 
-##Version 2:
+## Version 2:
 * Uses:
   -  Initializes an empty array
   -  Key Press Handling (handleKeyPress(event))
