@@ -13,8 +13,8 @@
   -  Key Press Handling (handleKeyPress(event))
   -  Storing Values (displayValues(value), this.values, push())
   -  Solving Expressions
-    * If Enter key word is pressed or the valid expression is formed, the solve() method is called
-    * Joins all elements in this.values into a string
-    * evaluates the mathematical expression
-    * Displays the result
+     1. If the Enter key is pressed or a valid expression is formed, the solve() method is called
+     2. This method joins all elements in this.values into a string
+     3. Evaluates the mathematical expression using the math.evaluate() function
+     4. Displays the result
   - Clears Values
