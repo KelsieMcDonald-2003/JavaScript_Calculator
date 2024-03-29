@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Calculator</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.4.0/math.min.js"></script>
+    </head>
+
+    <header>
+        <div id="navbar"></div>
+    </header>
+
+    <table id="calc" onload="new Calculator()">
+        <tr>
+            <td colspan="3"><input type="text" id="result"></td>
+            <td><input type="button" value="C" onclick="calculator.clear()"></td>
+        </tr>
+
+        <tr>
+            <td><input id="number" type="button" value="7" onclick="calculator.displayValues('7')"></td>
+            <td><input id="number" type="button" value="8" onclick="calculator.displayValues('8')"></td>
+            <td><input id="number" type="button" value="9" onclick="calculator.displayValues('9')"></td>
+            <td colspan="2"><input id="symbol" type="button" value="/" onclick="calculator.displayValues('/')"></td>
+        </tr>
+
+        <tr>
+            <td><input id="number" type="button" value="4" onclick="calculator.displayValues('4')"></td>
+            <td><input id="number" type="button" value="5" onclick="calculator.displayValues('5')"></td>
+            <td><input id="number" type="button" value="6" onclick="calculator.displayValues('6')"></td>
+            <td><input id="symbol" type="button" value="*" onclick="calculator.displayValues('*')"></td>
+        </tr>
+
+        <tr>
+            <td><input id="number" type="button" value="1" onclick="calculator.displayValues('1')"></td>
+            <td><input id="number" type="button" value="2" onclick="calculator.displayValues('2')"></td>
+            <td><input id="number" type="button" value="3" onclick="calculator.displayValues('3')"></td>
+            <td><input id="symbol" type="button" value="-" onclick="calculator.displayValues('-')"></td>
+        </tr>
+
+        <tr>
+            <td><input id="symbol" type="button" value="." onclick="calculator.displayValues('.')"></td>
+            <td><input id="number" type="button" value="0" onclick="calculator.displayValues('0')"></td>
+            <td><input id="symbol" type="button" value="+" onclick="calculator.displayValues('+')"></td>
+            <td><input id="" type="button" value="%" onclick="calculator.displayValues('%')"></td>
+        </tr>
+
+        <tr>
+            <td><input id="" type="button" value="(" onclick="calculator.displayValues('(')"></td>
+            <td><input id="" type="button" value=")" onclick="calculator.displayValues(')')"></td>
+            <td colspan="2"><input id="equal" type="button" value="=" onclick="calculator.solve()"></td>
+        </tr>
+    </table>
+</html><script defer src="vendors-node_modules_css-loader_dist_runtime_api_js-node_modules_css-loader_dist_runtime_sour-22d83e.js"></script><script defer src="calculator1.js"></script>

@@ -1,0 +1,29 @@
+#number{
+    background-color:lightslategray;
+}
+
+#calc{
+    margin-left:auto;
+    margin-right:auto;
+    size: 150px;
+    background-color:pink;
+    border-radius:10px;
+    border-style:solid;
+    padding:30px;
+    padding-top:10px;
+}
+
+#symbol{
+    background-color:lightskyblue;
+}
+
+#equal{
+    background-color:lightcoral;
+    padding-right:175px;
+}
+
+input{
+    border-radius:25px;
+    padding:30px;
+    font-size:X-large;
+}
