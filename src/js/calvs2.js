@@ -1,6 +1,8 @@
 import {navbar} from './navbar.js';
+import {directions} from './directions.js';
 import '../css/calculator2.css';
 navbar()
+directions()
 
 class Calculator{
     constructor(){

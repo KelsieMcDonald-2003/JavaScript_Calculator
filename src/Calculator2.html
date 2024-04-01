@@ -11,10 +11,14 @@
         <div id="navbar"></div>
     </header>
 
+    <article>
+        <div id="directions"></div>
+    </article>
+
     <table id="calc" onload="new Calculator()">
         <tr>
             <td colspan="3"><input type="text" id="result"></td>
-            <td><input type="button" value="C" onclick="calculator.clear()"></td>
+            <td><input id="clear" type="button" value="C" onclick="calculator.clear()"></td>
         </tr>
 
         <tr>
@@ -42,12 +46,12 @@
             <td><input id="symbol" type="button" value="." onclick="calculator.displayValues('.')"></td>
             <td><input id="number" type="button" value="0" onclick="calculator.displayValues('0')"></td>
             <td><input id="symbol" type="button" value="+" onclick="calculator.displayValues('+')"></td>
-            <td><input id="" type="button" value="%" onclick="calculator.displayValues('%')"></td>
+            <td><input id="symbol" type="button" value="%" onclick="calculator.displayValues('%')"></td>
         </tr>
 
         <tr>
-            <td><input id="" type="button" value="(" onclick="calculator.displayValues('(')"></td>
-            <td><input id="" type="button" value=")" onclick="calculator.displayValues(')')"></td>
+            <td><input id="symbol" type="button" value="(" onclick="calculator.displayValues('(')"></td>
+            <td><input id="symbol" type="button" value=")" onclick="calculator.displayValues(')')"></td>
             <td colspan="2"><input id="equal" type="button" value="=" onclick="calculator.solve()"></td>
         </tr>
     </table>

@@ -2,6 +2,10 @@
     background-color:lightslategray;
 }
 
+#clear{
+    background-color:lightcoral;
+}
+
 #calc{
     margin-left:auto;
     margin-right:auto;
@@ -27,4 +31,28 @@ input{
     border-radius:25px;
     padding:30px;
     font-size:X-large;
+}
+
+#number:hover{
+    background-color:white;
+    padding:30 px 60px;
+    font-size:200%;
+}
+
+#symbol:hover{
+    background-color:white;
+    padding:30 px 60px;
+    font-size:200%;
+}
+
+#equal:hover{
+    background-color:crimson;
+    padding:30 px 60px;
+    font-size:200%;
+}
+
+#clear:hover{
+    background-color:crimson;
+    padding:30 px 60px;
+    font-size:200%;
 }

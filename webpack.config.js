@@ -16,6 +16,7 @@ module.exports = {
   entry: {
     main: './src/js/main.js',
     navbar: './src/js/navbar.js',
+    directions: './src/js/directions.js',
     calculator1: './src/js/calvs1.js',
     calculator2: './src/js/calvs2.js',
   },
@@ -92,7 +93,13 @@ module.exports = {
       template: path.resolve(__dirname, "./src/commoncode/Navbar.html"),
       chunks: ["main"],
       inject: "body",
-      filename: "navbar.html",
+      filename: "Navbar.html",
+    }),
+    new htmlWebpackPlugin({
+      template: path.resolve(__dirname, "./src/commoncode/Directions.html"),
+      chunks: ["directions"],
+      inject: "body",
+      filename: "Directions.html",
     }),
     new webpack.DefinePlugin({
       NODE_ENV: JSON.stringify(process.env.NODE_ENV),
