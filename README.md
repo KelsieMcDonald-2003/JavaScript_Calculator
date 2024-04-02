@@ -21,12 +21,12 @@
   - It checks if the key pressed is a number or an operator and if so, it calls the displayValues method with the key as an argument
   - If the ‘Enter’ key is pressed, it calls the solve method
 *  displayValues(val):
-  - This method is used to display the values entered or calculated. It takes a value as an argument and appends it to the current value in the result input field.
+   - This method is used to display the values entered or calculated. It takes a value as an argument and appends it to the current value in the result input field.
 *  solve():
-  - This method is used to calculate the result of the expression entered
-  - It gets the expression from the result input field, evaluates it using the math.evaluate function from the mathjs library, and then displays the result in the result input field
+   - This method is used to calculate the result of the expression entered
+   - It gets the expression from the result input field, evaluates it using the math.evaluate function from the mathjs library, and then displays the result in the result input field
 *  clear():
-  - This method is used to clear the result input field. It sets the value of the result input field to an empty string
+   - This method is used to clear the result input field. It sets the value of the result input field to an empty string
 
 
 ## Version 2
