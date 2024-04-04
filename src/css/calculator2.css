@@ -36,23 +36,23 @@ input{
 #number:hover{
     background-color:white;
     padding:30 px 60px;
-    font-size:200%;
+    cursor:pointer;
 }
 
 #symbol:hover{
     background-color:white;
     padding:30 px 60px;
-    font-size:200%;
+    cursor:pointer;
 }
 
 #equal:hover{
     background-color:crimson;
     padding:30 px 60px;
-    font-size:200%;
+    cursor:pointer;
 }
 
 #clear:hover{
     background-color:crimson;
     padding:30 px 60px;
-    font-size:200%;
+    cursor:pointer;
 }
