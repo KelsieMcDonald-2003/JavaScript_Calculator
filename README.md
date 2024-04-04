@@ -6,7 +6,7 @@
 * Users can enter numbers and the symbols from the keyboard to create equations
 * Once an equation is ready, the user can either click the equal button on the screen or press enter from the keyboard to get the answer to their problems
  
- ## Version 1
+ ## Quick Explanation
  * This version directly appends the key pressed by the user to the "result" field
  * The displayValues function takes a value and appends it to the "result" field
  * The solve function evaluates the expression in the "result" field and updates it with the result
