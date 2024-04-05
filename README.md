@@ -6,7 +6,7 @@
 * Users can enter numbers and the symbols from the keyboard to create equations
 * Once an equation is ready, the user can either click the equal button on the screen or press enter from the keyboard to get the answer to their problems
  
- ## Version 1
+ ## Quick Explanation
  * This version directly appends the key pressed by the user to the "result" field
  * The displayValues function takes a value and appends it to the "result" field
  * The solve function evaluates the expression in the "result" field and updates it with the result
@@ -27,13 +27,3 @@
    - It gets the expression from the result input field, evaluates it using the math.evaluate function from the mathjs library, and then displays the result in the result input field
 *  clear():
    - This method is used to clear the result input field. It sets the value of the result input field to an empty string
-
-
-## Version 2
-* This version stores the keys pressed by the user in an array (this.values), and the "result" field is updated with the joined array values
-* The displayValues function pushes the value into the array and updates the "result" field with the joined array values
-* The solve function evaluates the joined array values, updates the "result" field with the result. and then clears the array
-* The clear function clears both the "result" field and the array
-
-### Methods
-* Similar to the methods in Version 1, but uses an array
