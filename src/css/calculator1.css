@@ -1,9 +1,17 @@
+td{
+    box-sizing: border-box;
+}
+
 #number{
     background-color:lightslategray;
+    height: 100px;
+    width: 75px;
 }
 
 #clear{
     background-color:lightcoral;
+    height: 100px;
+    width: 75px;
 }
 
 #calc{
@@ -19,13 +27,14 @@
 
 #symbol{
     background-color:palegreen;
+    height: 100px;
+    width: 75px;
 }
 
-#equal{
+#equals{
     background-color:lightcoral;
-    padding-right:175px;
-    text-align:center;
-    column-span:2;
+    height:100px;
+    width:225px;
 }
 
 input{
@@ -35,21 +44,21 @@ input{
 }
 
 #number:hover{
-    background-color:white;
+    background-color:silver;
     cursor:pointer;
 }
 
 #symbol:hover{
-    background-color:white;
-    cursor:pointer;
-}
-
-#equal:hover{
-    background-color:crimson;
+    background-color:greenyellow;
     cursor:pointer;
 }
 
 #clear:hover{
+    background-color:crimson;
+    cursor:pointer;
+}
+
+#equals:hover{
     background-color:crimson;
     cursor:pointer;
 }

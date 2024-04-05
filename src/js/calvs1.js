@@ -6,13 +6,16 @@ navbar()
 directions()
 
 class Calculator{
-
     /*
-        Initiallizes the cal property with the calculator element from the
-        HTML and sets up an event listener for key presses
+        This static property contains an array of allowed keys for the 
+        calculator
     */
-
     static ALLOWED_KEYS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '%', '(', ')', '=']
+    
+    /*
+        This is the constructor method for the Calculator class. It gets the calculator 
+        element from the DOM and adds an event listener for the “keyup” event.
+    */
     constructor(){
         this.cal = document.getElementById("calc");
         //this.cal.addEventListener("click", this);
@@ -20,23 +23,18 @@ class Calculator{
     }
 
     /*
-        This method is used to display the values entered or calculated
-        It takes a value as an argument and appends it to the current value
-        in the result input field
+        This method appends the passed value to the calculator’s display.
     */
     displayValues(val){
         document.getElementById("result").value += val;
     }
 
-
     /*
-        This method is triggered when a key is pressed
-        It Checks if the key pressed is a number or an operator
-        If so, it calls displayValues method with the key as an
-        argument
-        If the Enter key is pressed, it calls the solve method
+      This method handles the events triggered on the calculator. It checks if the event target is 
+      a button and if the value is allowed. If the value is “=”, it calls the solve() method. If 
+      the value is an allowed key, it calls the displayValues() method. It also calls the solve() 
+      method if the “Enter” key is pressed.  
     */
-
     handleEvent(e){
         e.preventDefault();
         let target = e.target;
@@ -59,10 +57,7 @@ class Calculator{
     }
     
     /*
-        This method is used to calculate the result of the expression entered
-        It gets the expression from the result input field, evaluates it using
-        the math.evaluate function from the mathjs library, and then displays 
-        the result in the result input field
+        This method evaluates the expression in the calculator’s display and updates the display with the result.
     */
     solve(){
         let x = document.getElementById("result").value;
@@ -71,14 +66,16 @@ class Calculator{
     }
 
     /*
-        This method is used to clear the result input field
-        It sets the value of the result input field to an empty
-        string
+        This method clears the calculator’s display.
     */
     clear(){
         document.getElementById("result").value = "";
     } 
 
+    /*
+        This method creates the buttons for the calculator and adds them to the DOM. 
+        It also assigns the appropriate event handlers to each button.
+    */
     createButtons(){
         const buttonValues = [
             ['7', '8', '9', '/'],
@@ -97,7 +94,12 @@ class Calculator{
                 const button = document.createElement('input');
                 button.type = 'button';
                 button.value = value;
-                button.id = isNaN(value) ? 'symbol' : 'number';
+                if(value === '='){
+                    button.id = 'equals';
+                    td.colSpan = 2;
+                } else{
+                    button.id = isNaN(value) ? 'symbol' : 'number';
+                }
                 button.onclick = value === '=' ? () => this.solve() : value === 'C' ? () => this.clear() : () => this.displayValues(value);
                 td.appendChild(button);
                 tr.appendChild(td);
@@ -107,6 +109,10 @@ class Calculator{
     }
 }
 
+/*
+    This is an event handler that gets called when the window has finished loading. 
+    It creates a new instance of the Calculator class and calls the createButtons() method.
+*/
 window.onload = () => {
     window.calculator = new Calculator();
     calculator.createButtons();

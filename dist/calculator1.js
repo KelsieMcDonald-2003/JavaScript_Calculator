@@ -25,6 +25,10 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
 (0,_navbar_js__WEBPACK_IMPORTED_MODULE_2__.navbar)();
 (0,_directions_js__WEBPACK_IMPORTED_MODULE_1__.directions)();
 var Calculator = /*#__PURE__*/function () {
+  /*
+      This is the constructor method for the Calculator class. It gets the calculator 
+      element from the DOM and adds an event listener for the “keyup” event.
+  */
   function Calculator() {
     _classCallCheck(this, Calculator);
     this.cal = document.getElementById("calc");
@@ -33,9 +37,7 @@ var Calculator = /*#__PURE__*/function () {
   }
 
   /*
-      This method is used to display the values entered or calculated
-      It takes a value as an argument and appends it to the current value
-      in the result input field
+      This method appends the passed value to the calculator’s display.
   */
   return _createClass(Calculator, [{
     key: "displayValues",
@@ -44,11 +46,10 @@ var Calculator = /*#__PURE__*/function () {
     }
 
     /*
-        This method is triggered when a key is pressed
-        It Checks if the key pressed is a number or an operator
-        If so, it calls displayValues method with the key as an
-        argument
-        If the Enter key is pressed, it calls the solve method
+      This method handles the events triggered on the calculator. It checks if the event target is 
+      a button and if the value is allowed. If the value is “=”, it calls the solve() method. If 
+      the value is an allowed key, it calls the displayValues() method. It also calls the solve() 
+      method if the “Enter” key is pressed.  
     */
   }, {
     key: "handleEvent",
@@ -73,10 +74,7 @@ var Calculator = /*#__PURE__*/function () {
     }
 
     /*
-        This method is used to calculate the result of the expression entered
-        It gets the expression from the result input field, evaluates it using
-        the math.evaluate function from the mathjs library, and then displays 
-        the result in the result input field
+        This method evaluates the expression in the calculator’s display and updates the display with the result.
     */
   }, {
     key: "solve",
@@ -87,15 +85,18 @@ var Calculator = /*#__PURE__*/function () {
     }
 
     /*
-        This method is used to clear the result input field
-        It sets the value of the result input field to an empty
-        string
+        This method clears the calculator’s display.
     */
   }, {
     key: "clear",
     value: function clear() {
       document.getElementById("result").value = "";
     }
+
+    /*
+        This method creates the buttons for the calculator and adds them to the DOM. 
+        It also assigns the appropriate event handlers to each button.
+    */
   }, {
     key: "createButtons",
     value: function createButtons() {
@@ -109,7 +110,12 @@ var Calculator = /*#__PURE__*/function () {
           var button = document.createElement('input');
           button.type = 'button';
           button.value = value;
-          button.id = isNaN(value) ? 'symbol' : 'number';
+          if (value === '=') {
+            button.id = 'equals';
+            td.colSpan = 2;
+          } else {
+            button.id = isNaN(value) ? 'symbol' : 'number';
+          }
           button.onclick = value === '=' ? function () {
             return _this.solve();
           } : value === 'C' ? function () {
@@ -126,8 +132,12 @@ var Calculator = /*#__PURE__*/function () {
   }]);
 }();
 /*
-    Initiallizes the cal property with the calculator element from the
-    HTML and sets up an event listener for key presses
+    This is an event handler that gets called when the window has finished loading. 
+    It creates a new instance of the Calculator class and calls the createButtons() method.
+*/
+/*
+    This static property contains an array of allowed keys for the 
+    calculator
 */
 _defineProperty(Calculator, "ALLOWED_KEYS", ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '%', '(', ')', '=']);
 window.onload = function () {
@@ -206,12 +216,20 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, `#number{
+___CSS_LOADER_EXPORT___.push([module.id, `td{
+    box-sizing: border-box;
+}
+
+#number{
     background-color:lightslategray;
+    height: 100px;
+    width: 75px;
 }
 
 #clear{
     background-color:lightcoral;
+    height: 100px;
+    width: 75px;
 }
 
 #calc{
@@ -227,13 +245,14 @@ ___CSS_LOADER_EXPORT___.push([module.id, `#number{
 
 #symbol{
     background-color:palegreen;
+    height: 100px;
+    width: 75px;
 }
 
-#equal{
+#equals{
     background-color:lightcoral;
-    padding-right:175px;
-    text-align:center;
-    column-span:2;
+    height:100px;
+    width:225px;
 }
 
 input{
@@ -243,24 +262,24 @@ input{
 }
 
 #number:hover{
-    background-color:white;
+    background-color:silver;
     cursor:pointer;
 }
 
 #symbol:hover{
-    background-color:white;
-    cursor:pointer;
-}
-
-#equal:hover{
-    background-color:crimson;
+    background-color:greenyellow;
     cursor:pointer;
 }
 
 #clear:hover{
     background-color:crimson;
     cursor:pointer;
-}`, "",{"version":3,"sources":["webpack://./src/css/calculator1.css"],"names":[],"mappings":"AAAA;IACI,+BAA+B;AACnC;;AAEA;IACI,2BAA2B;AAC/B;;AAEA;IACI,gBAAgB;IAChB,iBAAiB;IACjB,WAAW;IACX,8BAA8B;IAC9B,kBAAkB;IAClB,kBAAkB;IAClB,YAAY;IACZ,gBAAgB;AACpB;;AAEA;IACI,0BAA0B;AAC9B;;AAEA;IACI,2BAA2B;IAC3B,mBAAmB;IACnB,iBAAiB;IACjB,aAAa;AACjB;;AAEA;IACI,kBAAkB;IAClB,YAAY;IACZ,iBAAiB;AACrB;;AAEA;IACI,sBAAsB;IACtB,cAAc;AAClB;;AAEA;IACI,sBAAsB;IACtB,cAAc;AAClB;;AAEA;IACI,wBAAwB;IACxB,cAAc;AAClB;;AAEA;IACI,wBAAwB;IACxB,cAAc;AAClB","sourcesContent":["#number{\r\n    background-color:lightslategray;\r\n}\r\n\r\n#clear{\r\n    background-color:lightcoral;\r\n}\r\n\r\n#calc{\r\n    margin-left:auto;\r\n    margin-right:auto;\r\n    size: 150px;\r\n    background-color:paleturquoise;\r\n    border-style:solid;\r\n    border-radius:10px;\r\n    padding:30px;\r\n    padding-top:10px;\r\n}\r\n\r\n#symbol{\r\n    background-color:palegreen;\r\n}\r\n\r\n#equal{\r\n    background-color:lightcoral;\r\n    padding-right:175px;\r\n    text-align:center;\r\n    column-span:2;\r\n}\r\n\r\ninput{\r\n    border-radius:25px;\r\n    padding:30px;\r\n    font-size:X-large;\r\n}\r\n\r\n#number:hover{\r\n    background-color:white;\r\n    cursor:pointer;\r\n}\r\n\r\n#symbol:hover{\r\n    background-color:white;\r\n    cursor:pointer;\r\n}\r\n\r\n#equal:hover{\r\n    background-color:crimson;\r\n    cursor:pointer;\r\n}\r\n\r\n#clear:hover{\r\n    background-color:crimson;\r\n    cursor:pointer;\r\n}"],"sourceRoot":""}]);
+}
+
+#equals:hover{
+    background-color:crimson;
+    cursor:pointer;
+}`, "",{"version":3,"sources":["webpack://./src/css/calculator1.css"],"names":[],"mappings":"AAAA;IACI,sBAAsB;AAC1B;;AAEA;IACI,+BAA+B;IAC/B,aAAa;IACb,WAAW;AACf;;AAEA;IACI,2BAA2B;IAC3B,aAAa;IACb,WAAW;AACf;;AAEA;IACI,gBAAgB;IAChB,iBAAiB;IACjB,WAAW;IACX,8BAA8B;IAC9B,kBAAkB;IAClB,kBAAkB;IAClB,YAAY;IACZ,gBAAgB;AACpB;;AAEA;IACI,0BAA0B;IAC1B,aAAa;IACb,WAAW;AACf;;AAEA;IACI,2BAA2B;IAC3B,YAAY;IACZ,WAAW;AACf;;AAEA;IACI,kBAAkB;IAClB,YAAY;IACZ,iBAAiB;AACrB;;AAEA;IACI,uBAAuB;IACvB,cAAc;AAClB;;AAEA;IACI,4BAA4B;IAC5B,cAAc;AAClB;;AAEA;IACI,wBAAwB;IACxB,cAAc;AAClB;;AAEA;IACI,wBAAwB;IACxB,cAAc;AAClB","sourcesContent":["td{\r\n    box-sizing: border-box;\r\n}\r\n\r\n#number{\r\n    background-color:lightslategray;\r\n    height: 100px;\r\n    width: 75px;\r\n}\r\n\r\n#clear{\r\n    background-color:lightcoral;\r\n    height: 100px;\r\n    width: 75px;\r\n}\r\n\r\n#calc{\r\n    margin-left:auto;\r\n    margin-right:auto;\r\n    size: 150px;\r\n    background-color:paleturquoise;\r\n    border-style:solid;\r\n    border-radius:10px;\r\n    padding:30px;\r\n    padding-top:10px;\r\n}\r\n\r\n#symbol{\r\n    background-color:palegreen;\r\n    height: 100px;\r\n    width: 75px;\r\n}\r\n\r\n#equals{\r\n    background-color:lightcoral;\r\n    height:100px;\r\n    width:225px;\r\n}\r\n\r\ninput{\r\n    border-radius:25px;\r\n    padding:30px;\r\n    font-size:X-large;\r\n}\r\n\r\n#number:hover{\r\n    background-color:silver;\r\n    cursor:pointer;\r\n}\r\n\r\n#symbol:hover{\r\n    background-color:greenyellow;\r\n    cursor:pointer;\r\n}\r\n\r\n#clear:hover{\r\n    background-color:crimson;\r\n    cursor:pointer;\r\n}\r\n\r\n#equals:hover{\r\n    background-color:crimson;\r\n    cursor:pointer;\r\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -788,7 +807,7 @@ if (true) {
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("ee02a194c550b3341772")
+/******/ 		__webpack_require__.h = () => ("30ec730f3243ccd861c0")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
