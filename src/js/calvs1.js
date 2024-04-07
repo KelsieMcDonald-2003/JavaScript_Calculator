@@ -122,7 +122,8 @@ window.onload = () => {
 */
 
 class Calculator {
-    static ALLOWED_KEYS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '%', '(', ')', '='];
+    //static ALLOWED_KEYS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '%', '(', ')', '='];
+    static ALLOWED_KEYS = ['1', '2', '3', '+', '4', '5', '6', '-', '7', '8', '9', '*', '0', '00', '(', ')', '.', '%', '^', '='];
 
     constructor() {
         this.cal = document.getElementById("calc");

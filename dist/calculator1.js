@@ -213,7 +213,8 @@ var Calculator = /*#__PURE__*/function () {
     }
   }]);
 }();
-_defineProperty(Calculator, "ALLOWED_KEYS", ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '%', '(', ')', '=']);
+//static ALLOWED_KEYS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '%', '(', ')', '='];
+_defineProperty(Calculator, "ALLOWED_KEYS", ['1', '2', '3', '+', '4', '5', '6', '-', '7', '8', '9', '*', '0', '00', '(', ')', '.', '%', '^', '=']);
 window.onload = function () {
   window.calculator = new Calculator();
   calculator.createButtons();
@@ -891,7 +892,7 @@ if (true) {
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("62c45b04ca0b2f92bd3f")
+/******/ 		__webpack_require__.h = () => ("c4ab3eb0d172b1a987df")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
