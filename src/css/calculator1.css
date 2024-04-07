@@ -1,64 +1,41 @@
-td{
-    box-sizing: border-box;
-}
-
-#number{
-    background-color:lightslategray;
-    height: 100px;
-    width: 75px;
-}
-
-#clear{
-    background-color:lightcoral;
-    height: 100px;
-    width: 75px;
-}
-
-#calc{
+#calc {
+    background-color: plum;
+    border:solid;
+    border-radius:25px;
+    padding:10px;
     margin-left:auto;
     margin-right:auto;
-    size: 150px;
-    background-color:paleturquoise;
-    border-style:solid;
-    border-radius:10px;
-    padding:30px;
-    padding-top:10px;
 }
 
-#symbol{
-    background-color:palegreen;
-    height: 100px;
-    width: 75px;
-}
-
-#equals{
-    background-color:lightcoral;
-    height:100px;
-    width:225px;
-}
-
-input{
+#calc input[type="button"] {
+    background-color: grey;
+    color: white;
+    height:50px;
+    width:100px;
     border-radius:25px;
-    padding:30px;
-    font-size:X-large;
 }
 
-#number:hover{
+#calc input[type="button"][value="="],#calc input[type="button"][value="C"]{
+    background-color:lightcoral;
+}
+
+
+
+#result{
+    padding:10px;
+    width:285px;
+    height:25px;
+}
+
+#calc input[type="button"]:hover{
+    cursor:pointer;
     background-color:silver;
-    cursor:pointer;
 }
 
-#symbol:hover{
-    background-color:greenyellow;
-    cursor:pointer;
+#calc input[type="button"][value="="]:hover{
+    background-color: red;
 }
 
-#clear:hover{
-    background-color:crimson;
-    cursor:pointer;
-}
-
-#equals:hover{
-    background-color:crimson;
-    cursor:pointer;
+#calc input[type="button"][value="C"]:hover{
+    background-color:red;
 }

@@ -1,5 +1,4 @@
 /******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./src/js/calvs1.js":
@@ -8,10 +7,12 @@
   \**************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _css_calculator1_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../css/calculator1.css */ "./src/css/calculator1.css");
 /* harmony import */ var _directions_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./directions.js */ "./src/js/directions.js");
 /* harmony import */ var _navbar_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./navbar.js */ "./src/js/navbar.js");
+/* harmony import */ var mathjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! mathjs */ "./node_modules/mathjs/lib/esm/entry/impureFunctionsAny.generated.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
@@ -22,27 +23,33 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
 
 
 
+
 (0,_navbar_js__WEBPACK_IMPORTED_MODULE_2__.navbar)();
 (0,_directions_js__WEBPACK_IMPORTED_MODULE_1__.directions)();
-var Calculator = /*#__PURE__*/function () {
-  /*
-      This is the constructor method for the Calculator class. It gets the calculator 
-      element from the DOM and adds an event listener for the “keyup” event.
-  */
-  function Calculator() {
-    _classCallCheck(this, Calculator);
-    this.cal = document.getElementById("calc");
-    //this.cal.addEventListener("click", this);
-    this.cal.addEventListener("keyup", this);
-  }
 
-  /*
-      This method appends the passed value to the calculator’s display.
-  */
-  return _createClass(Calculator, [{
-    key: "displayValues",
-    value: function displayValues(val) {
-      document.getElementById("result").value += val;
+/*
+class Calculator{
+    /*
+        This static property contains an array of allowed keys for the 
+        calculator
+    
+    static ALLOWED_KEYS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '%', '(', ')', '=']
+    
+    /*
+        This is the constructor method for the Calculator class. It gets the calculator 
+        element from the DOM and adds an event listener for the “keyup” event.
+    
+    constructor(){
+        this.cal = document.getElementById("calc");
+        //this.cal.addEventListener("click", this);
+        this.cal.addEventListener("keyup", this);
+    }
+
+    /*
+        This method appends the passed value to the calculator’s display.
+    
+    displayValues(val){
+        document.getElementById("result").value += val;
     }
 
     /*
@@ -50,43 +57,127 @@ var Calculator = /*#__PURE__*/function () {
       a button and if the value is allowed. If the value is “=”, it calls the solve() method. If 
       the value is an allowed key, it calls the displayValues() method. It also calls the solve() 
       method if the “Enter” key is pressed.  
-    */
+    
+    handleEvent(e){
+        e.preventDefault();
+        let target = e.target;
+        let value = e.type == "keyup" ? e.key : e.target.value;
+    
+        // Check if the event target is a button
+        if(target.tagName.toLowerCase() === 'input' && target.type === 'button'){
+            if(value === "="){
+                this.solve();
+            } else if(Calculator.ALLOWED_KEYS.includes(value)){
+                this.displayValues(value);
+            }
+            // Stop the event from bubbling up to the calculator
+            e.stopPropagation();
+        }
+    
+        if(e.keyCode === 13){
+            this.solve();
+        }
+    }
+    
+    /*
+        This method evaluates the expression in the calculator’s display and updates the display with the result.
+    
+    solve(){
+        let x = document.getElementById("result").value;
+        let y = math.evaluate(x);
+        document.getElementById("result").value = y;
+    }
+
+    /*
+        This method clears the calculator’s display.
+    
+    clear(){
+        document.getElementById("result").value = "";
+    } 
+
+    /*
+        This method creates the buttons for the calculator and adds them to the DOM. 
+        It also assigns the appropriate event handlers to each button.
+    
+    createButtons(){
+        const buttonValues = [
+            ['7', '8', '9', '/'],
+            ['4', '5', '6', '*'],
+            ['1', '2', '3', '-'],
+            ['.', '0', '+', '%'],
+            ['(', ')', '=']
+        ];
+
+        const table = document.getElementById('calc');
+
+        buttonValues.forEach(row => {
+            const tr = document.createElement('tr');
+            row.forEach(value => {
+                const td = document.createElement('td');
+                const button = document.createElement('input');
+                button.type = 'button';
+                button.value = value;
+                if(value === '='){
+                    button.id = 'equals';
+                    td.colSpan = 2;
+                } else{
+                    button.id = isNaN(value) ? 'symbol' : 'number';
+                }
+                button.onclick = value === '=' ? () => this.solve() : value === 'C' ? () => this.clear() : () => this.displayValues(value);
+                td.appendChild(button);
+                tr.appendChild(td);
+            });
+            table.appendChild(tr);
+        });
+    }
+}
+
+/*
+    This is an event handler that gets called when the window has finished loading. 
+    It creates a new instance of the Calculator class and calls the createButtons() method.
+
+window.onload = () => {
+    window.calculator = new Calculator();
+    calculator.createButtons();
+}
+*/
+var Calculator = /*#__PURE__*/function () {
+  function Calculator() {
+    _classCallCheck(this, Calculator);
+    this.cal = document.getElementById("calc");
+    this.cal.addEventListener("keyup", this);
+    this.cal.addEventListener("click", this);
+  }
+  return _createClass(Calculator, [{
+    key: "displayValues",
+    value: function displayValues(val) {
+      document.getElementById("result").value += val;
+    }
   }, {
     key: "handleEvent",
     value: function handleEvent(e) {
       e.preventDefault();
       var target = e.target;
       var value = e.type == "keyup" ? e.key : e.target.value;
-
-      // Check if the event target is a button
       if (target.tagName.toLowerCase() === 'input' && target.type === 'button') {
         if (value === "=") {
           this.solve();
         } else if (Calculator.ALLOWED_KEYS.includes(value)) {
           this.displayValues(value);
         }
-        // Stop the event from bubbling up to the calculator
         e.stopPropagation();
       }
       if (e.keyCode === 13) {
         this.solve();
       }
     }
-
-    /*
-        This method evaluates the expression in the calculator’s display and updates the display with the result.
-    */
   }, {
     key: "solve",
     value: function solve() {
       var x = document.getElementById("result").value;
-      var y = math.evaluate(x);
+      var y = mathjs__WEBPACK_IMPORTED_MODULE_3__.evaluate(x);
       document.getElementById("result").value = y;
     }
-
-    /*
-        This method clears the calculator’s display.
-    */
   }, {
     key: "clear",
     value: function clear() {
@@ -94,51 +185,34 @@ var Calculator = /*#__PURE__*/function () {
     }
 
     /*
-        This method creates the buttons for the calculator and adds them to the DOM. 
-        It also assigns the appropriate event handlers to each button.
+     The following method is used to dynamically create a set of
+     buttons and add them to a table in the HTML document.
     */
   }, {
     key: "createButtons",
     value: function createButtons() {
-      var _this = this;
-      var buttonValues = [['7', '8', '9', '/'], ['4', '5', '6', '*'], ['1', '2', '3', '-'], ['.', '0', '+', '%'], ['(', ')', '=']];
       var table = document.getElementById('calc');
-      buttonValues.forEach(function (row) {
-        var tr = document.createElement('tr');
-        row.forEach(function (value) {
-          var td = document.createElement('td');
-          var button = document.createElement('input');
-          button.type = 'button';
-          button.value = value;
-          if (value === '=') {
-            button.id = 'equals';
-            td.colSpan = 2;
-          } else {
-            button.id = isNaN(value) ? 'symbol' : 'number';
-          }
-          button.onclick = value === '=' ? function () {
-            return _this.solve();
-          } : value === 'C' ? function () {
-            return _this.clear();
-          } : function () {
-            return _this.displayValues(value);
-          };
-          td.appendChild(button);
-          tr.appendChild(td);
-        });
-        table.appendChild(tr);
+      var buttonId = 0;
+      var tr = document.createElement('tr'); // Create the first row
+
+      Calculator.ALLOWED_KEYS.forEach(function (value, index) {
+        if (index % 4 === 0 && index !== 0) {
+          // Change '4' to set the number of buttons per row
+          table.appendChild(tr); // Append the completed row to the table
+          tr = document.createElement('tr'); // Create a new row for next set of buttons
+        }
+        var td = document.createElement('td');
+        var button = document.createElement('input');
+        button.type = 'button';
+        button.value = value;
+        button.id = "button".concat(buttonId++);
+        td.appendChild(button);
+        tr.appendChild(td);
       });
+      table.appendChild(tr); // Append the last row to the table
     }
   }]);
 }();
-/*
-    This is an event handler that gets called when the window has finished loading. 
-    It creates a new instance of the Calculator class and calls the createButtons() method.
-*/
-/*
-    This static property contains an array of allowed keys for the 
-    calculator
-*/
 _defineProperty(Calculator, "ALLOWED_KEYS", ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '%', '(', ')', '=']);
 window.onload = function () {
   window.calculator = new Calculator();
@@ -153,6 +227,7 @@ window.onload = function () {
   \******************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   directions: () => (/* binding */ directions)
@@ -178,6 +253,7 @@ function directions() {
   \**************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   navbar: () => (/* binding */ navbar)
@@ -203,6 +279,7 @@ function navbar() {
   \***********************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -216,70 +293,47 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, `td{
-    box-sizing: border-box;
-}
-
-#number{
-    background-color:lightslategray;
-    height: 100px;
-    width: 75px;
-}
-
-#clear{
-    background-color:lightcoral;
-    height: 100px;
-    width: 75px;
-}
-
-#calc{
+___CSS_LOADER_EXPORT___.push([module.id, `#calc {
+    background-color: plum;
+    border:solid;
+    border-radius:25px;
+    padding:10px;
     margin-left:auto;
     margin-right:auto;
-    size: 150px;
-    background-color:paleturquoise;
-    border-style:solid;
-    border-radius:10px;
-    padding:30px;
-    padding-top:10px;
 }
 
-#symbol{
-    background-color:palegreen;
-    height: 100px;
-    width: 75px;
-}
-
-#equals{
-    background-color:lightcoral;
-    height:100px;
-    width:225px;
-}
-
-input{
+#calc input[type="button"] {
+    background-color: grey;
+    color: white;
+    height:50px;
+    width:100px;
     border-radius:25px;
-    padding:30px;
-    font-size:X-large;
 }
 
-#number:hover{
+#calc input[type="button"][value="="],#calc input[type="button"][value="C"]{
+    background-color:lightcoral;
+}
+
+
+
+#result{
+    padding:10px;
+    width:285px;
+    height:25px;
+}
+
+#calc input[type="button"]:hover{
+    cursor:pointer;
     background-color:silver;
-    cursor:pointer;
 }
 
-#symbol:hover{
-    background-color:greenyellow;
-    cursor:pointer;
+#calc input[type="button"][value="="]:hover{
+    background-color: red;
 }
 
-#clear:hover{
-    background-color:crimson;
-    cursor:pointer;
-}
-
-#equals:hover{
-    background-color:crimson;
-    cursor:pointer;
-}`, "",{"version":3,"sources":["webpack://./src/css/calculator1.css"],"names":[],"mappings":"AAAA;IACI,sBAAsB;AAC1B;;AAEA;IACI,+BAA+B;IAC/B,aAAa;IACb,WAAW;AACf;;AAEA;IACI,2BAA2B;IAC3B,aAAa;IACb,WAAW;AACf;;AAEA;IACI,gBAAgB;IAChB,iBAAiB;IACjB,WAAW;IACX,8BAA8B;IAC9B,kBAAkB;IAClB,kBAAkB;IAClB,YAAY;IACZ,gBAAgB;AACpB;;AAEA;IACI,0BAA0B;IAC1B,aAAa;IACb,WAAW;AACf;;AAEA;IACI,2BAA2B;IAC3B,YAAY;IACZ,WAAW;AACf;;AAEA;IACI,kBAAkB;IAClB,YAAY;IACZ,iBAAiB;AACrB;;AAEA;IACI,uBAAuB;IACvB,cAAc;AAClB;;AAEA;IACI,4BAA4B;IAC5B,cAAc;AAClB;;AAEA;IACI,wBAAwB;IACxB,cAAc;AAClB;;AAEA;IACI,wBAAwB;IACxB,cAAc;AAClB","sourcesContent":["td{\r\n    box-sizing: border-box;\r\n}\r\n\r\n#number{\r\n    background-color:lightslategray;\r\n    height: 100px;\r\n    width: 75px;\r\n}\r\n\r\n#clear{\r\n    background-color:lightcoral;\r\n    height: 100px;\r\n    width: 75px;\r\n}\r\n\r\n#calc{\r\n    margin-left:auto;\r\n    margin-right:auto;\r\n    size: 150px;\r\n    background-color:paleturquoise;\r\n    border-style:solid;\r\n    border-radius:10px;\r\n    padding:30px;\r\n    padding-top:10px;\r\n}\r\n\r\n#symbol{\r\n    background-color:palegreen;\r\n    height: 100px;\r\n    width: 75px;\r\n}\r\n\r\n#equals{\r\n    background-color:lightcoral;\r\n    height:100px;\r\n    width:225px;\r\n}\r\n\r\ninput{\r\n    border-radius:25px;\r\n    padding:30px;\r\n    font-size:X-large;\r\n}\r\n\r\n#number:hover{\r\n    background-color:silver;\r\n    cursor:pointer;\r\n}\r\n\r\n#symbol:hover{\r\n    background-color:greenyellow;\r\n    cursor:pointer;\r\n}\r\n\r\n#clear:hover{\r\n    background-color:crimson;\r\n    cursor:pointer;\r\n}\r\n\r\n#equals:hover{\r\n    background-color:crimson;\r\n    cursor:pointer;\r\n}"],"sourceRoot":""}]);
+#calc input[type="button"][value="C"]:hover{
+    background-color:red;
+}`, "",{"version":3,"sources":["webpack://./src/css/calculator1.css"],"names":[],"mappings":"AAAA;IACI,sBAAsB;IACtB,YAAY;IACZ,kBAAkB;IAClB,YAAY;IACZ,gBAAgB;IAChB,iBAAiB;AACrB;;AAEA;IACI,sBAAsB;IACtB,YAAY;IACZ,WAAW;IACX,WAAW;IACX,kBAAkB;AACtB;;AAEA;IACI,2BAA2B;AAC/B;;;;AAIA;IACI,YAAY;IACZ,WAAW;IACX,WAAW;AACf;;AAEA;IACI,cAAc;IACd,uBAAuB;AAC3B;;AAEA;IACI,qBAAqB;AACzB;;AAEA;IACI,oBAAoB;AACxB","sourcesContent":["#calc {\r\n    background-color: plum;\r\n    border:solid;\r\n    border-radius:25px;\r\n    padding:10px;\r\n    margin-left:auto;\r\n    margin-right:auto;\r\n}\r\n\r\n#calc input[type=\"button\"] {\r\n    background-color: grey;\r\n    color: white;\r\n    height:50px;\r\n    width:100px;\r\n    border-radius:25px;\r\n}\r\n\r\n#calc input[type=\"button\"][value=\"=\"],#calc input[type=\"button\"][value=\"C\"]{\r\n    background-color:lightcoral;\r\n}\r\n\r\n\r\n\r\n#result{\r\n    padding:10px;\r\n    width:285px;\r\n    height:25px;\r\n}\r\n\r\n#calc input[type=\"button\"]:hover{\r\n    cursor:pointer;\r\n    background-color:silver;\r\n}\r\n\r\n#calc input[type=\"button\"][value=\"=\"]:hover{\r\n    background-color: red;\r\n}\r\n\r\n#calc input[type=\"button\"][value=\"C\"]:hover{\r\n    background-color:red;\r\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -292,6 +346,7 @@ input{
   \**********************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -321,6 +376,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `#directions{
   \******************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -375,6 +431,7 @@ a:hover{
   \*********************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -481,6 +538,7 @@ if (true) {
   \********************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -587,6 +645,7 @@ if (true) {
   \****************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -685,6 +744,16 @@ if (true) {
        /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_navbar_css__WEBPACK_IMPORTED_MODULE_6__["default"] && _node_modules_css_loader_dist_cjs_js_navbar_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals ? _node_modules_css_loader_dist_cjs_js_navbar_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals : undefined);
 
 
+/***/ }),
+
+/***/ "?d4c0":
+/*!************************!*\
+  !*** crypto (ignored) ***!
+  \************************/
+/***/ (() => {
+
+/* (ignored) */
+
 /***/ })
 
 /******/ 	});
@@ -702,7 +771,7 @@ if (true) {
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = __webpack_module_cache__[moduleId] = {
 /******/ 			id: moduleId,
-/******/ 			// no module.loaded needed
+/******/ 			loaded: false,
 /******/ 			exports: {}
 /******/ 		};
 /******/ 	
@@ -711,6 +780,9 @@ if (true) {
 /******/ 		__webpack_require__.i.forEach(function(handler) { handler(execOptions); });
 /******/ 		module = execOptions.module;
 /******/ 		execOptions.factory.call(module.exports, module, module.exports, execOptions.require);
+/******/ 	
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
@@ -726,6 +798,18 @@ if (true) {
 /******/ 	__webpack_require__.i = [];
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/amd define */
+/******/ 	(() => {
+/******/ 		__webpack_require__.amdD = function () {
+/******/ 			throw new Error('define cannot be used indirect');
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/amd options */
+/******/ 	(() => {
+/******/ 		__webpack_require__.amdO = {};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/chunk loaded */
 /******/ 	(() => {
 /******/ 		var deferred = [];
@@ -807,7 +891,7 @@ if (true) {
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("30ec730f3243ccd861c0")
+/******/ 		__webpack_require__.h = () => ("62c45b04ca0b2f92bd3f")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
@@ -881,6 +965,15 @@ if (true) {
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/node module decorator */
+/******/ 	(() => {
+/******/ 		__webpack_require__.nmd = (module) => {
+/******/ 			module.paths = [];
+/******/ 			if (!module.children) module.children = [];
+/******/ 			return module;
 /******/ 		};
 /******/ 	})();
 /******/ 	
@@ -1948,9 +2041,9 @@ if (true) {
 /******/ 	// module cache are used so entry inlining is disabled
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	__webpack_require__.O(undefined, ["vendors-node_modules_css-loader_dist_runtime_api_js-node_modules_css-loader_dist_runtime_sour-22d83e"], () => (__webpack_require__("./node_modules/webpack-dev-server/client/index.js?protocol=ws%3A&hostname=0.0.0.0&port=8080&pathname=%2Fws&logging=info&overlay=true&reconnect=10&hot=true&live-reload=true")))
-/******/ 	__webpack_require__.O(undefined, ["vendors-node_modules_css-loader_dist_runtime_api_js-node_modules_css-loader_dist_runtime_sour-22d83e"], () => (__webpack_require__("./node_modules/webpack/hot/dev-server.js")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["vendors-node_modules_css-loader_dist_runtime_api_js-node_modules_css-loader_dist_runtime_sour-22d83e"], () => (__webpack_require__("./src/js/calvs1.js")))
+/******/ 	__webpack_require__.O(undefined, ["vendors-node_modules_css-loader_dist_runtime_api_js-node_modules_css-loader_dist_runtime_sour-22d83e","vendors-node_modules_mathjs_lib_esm_entry_impureFunctionsAny_generated_js"], () => (__webpack_require__("./node_modules/webpack-dev-server/client/index.js?protocol=ws%3A&hostname=0.0.0.0&port=8080&pathname=%2Fws&logging=info&overlay=true&reconnect=10&hot=true&live-reload=true")))
+/******/ 	__webpack_require__.O(undefined, ["vendors-node_modules_css-loader_dist_runtime_api_js-node_modules_css-loader_dist_runtime_sour-22d83e","vendors-node_modules_mathjs_lib_esm_entry_impureFunctionsAny_generated_js"], () => (__webpack_require__("./node_modules/webpack/hot/dev-server.js")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["vendors-node_modules_css-loader_dist_runtime_api_js-node_modules_css-loader_dist_runtime_sour-22d83e","vendors-node_modules_mathjs_lib_esm_entry_impureFunctionsAny_generated_js"], () => (__webpack_require__("./src/js/calvs1.js")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
