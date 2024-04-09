@@ -14,11 +14,11 @@ const fileNamePrefix = isProduction ? '[chunkhash].' : '';
 module.exports = {
   mode: isProduction ? 'production' : 'development',
   entry: {
-    main: './dev_modules/@ocdla/calculator/js/main.js',
-    navbar: './dev_modules/@ocdla/calculator/js/navbar.js',
-    directions: './dev_modules/@ocdla/calculator/js/directions.js',
-    calculator: './dev_modules/@ocdla/calculator/js/calculator.js',
-    controller: './src/js/controller.js'
+    main: './src/js/main.js',
+    navbar: './src/js/navbar.js',
+    directions: './src/js/directions.js',
+    calculator: './node_modules/@ocdla/calculator/js/Calculator.js',
+    controller: './src/js/Controller.js'
   },
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -44,7 +44,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env'],
+            presets: ['@babel/preset-env', '@babel/preset-react'],
           },
         },
       },
@@ -73,16 +73,10 @@ module.exports = {
   plugins: [
     new htmlWebpackPlugin({
       template: path.resolve(__dirname, "./src/index.html"),
-      chunks: ["main"],
+      chunks: ["controller"],
       inject: "body",
       filename: "index.html",
     }),
-    new htmlWebpackPlugin({
-        template: path.resolve(__dirname, "./src/calculator.html"),
-        chunks: ["controller"],
-        inject: "body",
-        filename: "calculator.html",
-      }),
     new htmlWebpackPlugin({
       template: path.resolve(__dirname, "./src/commoncode/navbar.html"),
       chunks: ["main"],
