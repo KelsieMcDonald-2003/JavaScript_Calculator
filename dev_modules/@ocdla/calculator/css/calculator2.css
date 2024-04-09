@@ -1,0 +1,58 @@
+#number{
+    background-color:lightslategray;
+}
+
+#clear{
+    background-color:lightcoral;
+}
+
+#calc{
+    margin-left:auto;
+    margin-right:auto;
+    size: 150px;
+    background-color:paleturquoise;
+    border-style:solid;
+    border-radius:10px;
+    padding:30px;
+    padding-top:10px;
+}
+
+#symbol{
+    background-color:palegreen;
+}
+
+#equal{
+    background-color:lightcoral;
+    padding-right:175px;
+    text-align:center;
+}
+
+input{
+    border-radius:25px;
+    padding:30px;
+    font-size:X-large;
+}
+
+#number:hover{
+    background-color:white;
+    padding:30 px 60px;
+    cursor:pointer;
+}
+
+#symbol:hover{
+    background-color:white;
+    padding:30 px 60px;
+    cursor:pointer;
+}
+
+#equal:hover{
+    background-color:crimson;
+    padding:30 px 60px;
+    cursor:pointer;
+}
+
+#clear:hover{
+    background-color:crimson;
+    padding:30 px 60px;
+    cursor:pointer;
+}
