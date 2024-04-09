@@ -1,8 +1,8 @@
 {
-    "name": "recipesearchapp",
+    "name": "calculator",
     "version": "1.0.0",
-    "description": "",
-    "main": "general.js",
+    "description": "A calculator that can calculate simple equations",
+    "main": "main.js",
     "scripts": {
         "webpack": "webpack",
         "build": "webpack --config webpack.config.js",
@@ -29,7 +29,8 @@
         "webpack-bundle-analyzer": "^4.6.1",
         "webpack-cli": "^4.10.0",
         "webpack-dev-server": "^4.11.1",
-        "webpack-merge": "^5.8.0"
+        "webpack-merge": "^5.8.0",
+        "@ocdla/calculator":"file:dev_modules/@ocdla/calculator"  
     },
     "dependencies": {
         "babel-loader": "^8.2.5",
