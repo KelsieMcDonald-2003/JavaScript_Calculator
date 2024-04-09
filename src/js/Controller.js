@@ -1,14 +1,19 @@
+/** @jsx vNode */
 import '../css/calculator1.css';
-import {directions} from '../../dev_modules/@ocdla/calculator/js/directions.js';
-import {navbar} from '../../dev_modules/@ocdla/calculator/js/navbar.js';
-import {Calculator} from '../../dev_modules/@ocdla/calculator/js/calculator.js';
+import {directions} from './directions.js';
+import {navbar} from './navbar.js';
+import {Calculator} from '../../node_modules/@ocdla/calculator/js/Calculator.js';
+import {vNode, View} from "../../node_modules/@ocdla/view/view.js";
 
 class Controller {
     constructor() {
         navbar();
         directions();
+        const table = document.getElementById('calc');
+        let html = View.createElement(<CalculatorComponent></CalculatorComponent>);
+        table.appendChild(html);
         this.calculator = new Calculator();
-        this.createButtons();
+        //this.createButtons();
         this.cal = document.getElementById("calc");
         this.cal.addEventListener("keyup", this);
         this.cal.addEventListener("click", this);
@@ -71,6 +76,47 @@ class Controller {
         table.appendChild(tr); // Append the last row to the table
     }  
 }
+
+
+const CalculatorComponent = function(props) {
+    return (
+        <div id="calculator">
+
+            <table>
+                <tbody>
+                    <tr>
+                        <td colspan="3">
+                            <input type="text" id="display" />
+                        </td>
+                        <td>
+                            <input type="button" value="C" />
+                        </td>
+                    </tr>
+                    <ButtonGroup keys="1,2,3,+" />
+                    <ButtonGroup keys="4,5,6,-" />
+                    <ButtonGroup keys="7,8,9,*" />
+                    <ButtonGroup keys="(,0,),." />
+                </tbody>
+            </table>
+
+        </div>
+    );
+};
+
+const ButtonGroup = function(props) {
+
+    // convert string of keys to an array of characters.
+    let keys = props.keys.split(",");
+
+    return (
+        <tr>
+            {keys.map((key) => {
+                return <td><input type="button" value={key} /></td>;
+            })}
+        </tr>
+    );
+
+};
 
 window.onload = () => {
     window.controller = new Controller();

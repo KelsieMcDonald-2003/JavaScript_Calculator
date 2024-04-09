@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <title>Calculator</title>
         <meta charset="UTF-8">
-        <title>Home</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
@@ -10,15 +10,14 @@
         <div id="navbar"></div>
     </header>
 
-    <h1>Welcome</h1>
-    <p>
-        Welcome to our calculator program!<br>
+    <article>
+        <div id="directions"></div>
+    </article>
 
-        Click on the Calculator tab above or the button down below to calculate 
-        to your heart's desire!
-    </p>
-
-    <p>
-        <a href="./Calculator1.html">Calculator</a>
-    </p>
+    <table id="calc">
+        <tr>
+            <td colspan="3"><input type="text" id="result"></td>
+            <td><input id="clear" type="button" value="C" onclick="controller.clear()"></td>
+        </tr>
+    </table>
 </html>
