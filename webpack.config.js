@@ -14,11 +14,11 @@ const fileNamePrefix = isProduction ? '[chunkhash].' : '';
 module.exports = {
   mode: isProduction ? 'production' : 'development',
   entry: {
-    main: './src/js/main.js',
-    navbar: './src/js/navbar.js',
-    directions: './src/js/directions.js',
-    calculator1: './src/js/calvs1.js',
-    calculator2: './src/js/calvs2.js',
+    main: './dev_modules/@ocdla/calculator/js/main.js',
+    navbar: './dev_modules/@ocdla/calculator/js/navbar.js',
+    directions: './dev_modules/@ocdla/calculator/js/directions.js',
+    calculator: './dev_modules/@ocdla/calculator/js/calculator.js',
+    controller: './src/js/controller.js'
   },
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -72,34 +72,28 @@ module.exports = {
   },
   plugins: [
     new htmlWebpackPlugin({
-      template: path.resolve(__dirname, "./src/Index.html"),
+      template: path.resolve(__dirname, "./src/index.html"),
       chunks: ["main"],
       inject: "body",
-      filename: "Index.html",
+      filename: "index.html",
     }),
     new htmlWebpackPlugin({
-        template: path.resolve(__dirname, "./src/Calculator1.html"),
-        chunks: ["calculator1"],
+        template: path.resolve(__dirname, "./src/calculator.html"),
+        chunks: ["controller"],
         inject: "body",
-        filename: "Calculator1.html",
-      }),
-      new htmlWebpackPlugin({
-        template: path.resolve(__dirname, "./src/Calculator2.html"),
-        chunks: ["calculator2"],
-        inject: "body",
-        filename: "Calculator2.html",
+        filename: "calculator.html",
       }),
     new htmlWebpackPlugin({
-      template: path.resolve(__dirname, "./src/commoncode/Navbar.html"),
+      template: path.resolve(__dirname, "./src/commoncode/navbar.html"),
       chunks: ["main"],
       inject: "body",
-      filename: "Navbar.html",
+      filename: "navbar.html",
     }),
     new htmlWebpackPlugin({
-      template: path.resolve(__dirname, "./src/commoncode/Directions.html"),
+      template: path.resolve(__dirname, "./src/commoncode/directions.html"),
       chunks: ["directions"],
       inject: "body",
-      filename: "Directions.html",
+      filename: "directions.html",
     }),
     new webpack.DefinePlugin({
       NODE_ENV: JSON.stringify(process.env.NODE_ENV),
