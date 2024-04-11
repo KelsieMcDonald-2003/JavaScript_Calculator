@@ -1,16 +1,14 @@
 /** @jsx vNode */
-import '../css/calculator1.css';
+import '../css/calculator.css';
 import {directions} from './directions.js';
-import {navbar} from './navbar.js';
 import {Calculator} from '../../node_modules/@ocdla/calculator/js/Calculator.js';
 import {vNode, View} from "../../node_modules/@ocdla/view/view.js";
 
 class Controller {
     constructor() {
-        navbar();
         directions();
         const table = document.getElementById('calc');
-        let html = View.createElement(<CalculatorComponent></CalculatorComponent>);
+        let html = View.createElement(<CalculatorComponent />);
         table.appendChild(html);
         this.calculator = new Calculator();
         //this.createButtons();
@@ -22,7 +20,7 @@ class Controller {
     displayInput(input) {
         document.getElementById("result").value += input;
     }
-
+    /*
     handleEvent(e) {
         e.stopPropagation();
         e.preventDefault();
@@ -40,6 +38,23 @@ class Controller {
         }
         this.displayInput(input);
     }
+    */
+
+    handleEvent(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        let target = e.target;
+        let input = e.type == "keyup" ? e.key : e.target.value;
+    
+        if(input === "=" || e.keyCode === 13) {
+            let userinput = document.getElementById("result").value;
+            let solution = this.calculator.solve(userinput);
+            this.displaySolution(solution);
+        } else if (Calculator.ALLOWED_KEYS.includes(input)) {
+            this.displayInput(input);
+        }
+    }
+    
 
     displaySolution(y) {
         document.getElementById("result").value = y;
@@ -53,6 +68,8 @@ class Controller {
      The following method is used to dynamically create a set of
      buttons and add them to a table in the HTML document.
     */
+
+     /*
     createButtons() {
         const table = document.getElementById('calc');
         let buttonId = 0;
@@ -74,7 +91,8 @@ class Controller {
         });
     
         table.appendChild(tr); // Append the last row to the table
-    }  
+    }
+    */  
 }
 
 
@@ -86,16 +104,17 @@ const CalculatorComponent = function(props) {
                 <tbody>
                     <tr>
                         <td colspan="3">
-                            <input type="text" id="display" />
+                            <input type="text" id="result" />
                         </td>
                         <td>
-                            <input type="button" value="C" />
+                            <input id="clear" type="button" value="C" onclick={() => window.controller.clear()} />
                         </td>
                     </tr>
                     <ButtonGroup keys="1,2,3,+" />
                     <ButtonGroup keys="4,5,6,-" />
                     <ButtonGroup keys="7,8,9,*" />
                     <ButtonGroup keys="(,0,),." />
+                    <ButtonGroup keys="/,%,^,=" />
                 </tbody>
             </table>
 
