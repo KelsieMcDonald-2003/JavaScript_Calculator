@@ -15,7 +15,6 @@ module.exports = {
   mode: isProduction ? 'production' : 'development',
   entry: {
     main: './src/js/main.js',
-    navbar: './src/js/navbar.js',
     directions: './src/js/directions.js',
     calculator: './node_modules/@ocdla/calculator/js/Calculator.js',
     controller: './src/js/Controller.js'
@@ -76,12 +75,6 @@ module.exports = {
       chunks: ["controller"],
       inject: "body",
       filename: "index.html",
-    }),
-    new htmlWebpackPlugin({
-      template: path.resolve(__dirname, "./src/commoncode/navbar.html"),
-      chunks: ["main"],
-      inject: "body",
-      filename: "navbar.html",
     }),
     new htmlWebpackPlugin({
       template: path.resolve(__dirname, "./src/commoncode/directions.html"),
