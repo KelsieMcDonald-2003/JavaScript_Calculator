@@ -100,11 +100,11 @@ const CalculatorComponent = function(props) {
     return (
         <div id="calculator">
 
-            <table>
+            <table id="calc">
                 <tbody>
                     <tr>
                         <td colspan="3">
-                            <input type="text" id="result" />
+                            <input type="text" id="result" placeholder="Enter Numbers" />
                         </td>
                         <td>
                             <input id="clear" type="button" value="C" onclick={() => window.controller.clear()} />
