@@ -20,26 +20,7 @@ class Controller {
     displayInput(input) {
         document.getElementById("result").value += input;
     }
-    /*
-    handleEvent(e) {
-        e.stopPropagation();
-        e.preventDefault();
-        let target = e.target;
-        let input = e.type == "keyup" ? e.key : e.target.value;
-
-        if(input === "=" || e.keyCode === 13) {
-            let userinput = document.getElementById("result").value;
-            let solution = this.calculator.solve(userinput);
-            this.displaySolution(solution);
-        }
-
-        if (!Calculator.ALLOWED_KEYS.includes(input)) {
-            return;
-        }
-        this.displayInput(input);
-    }
-    */
-
+    
     handleEvent(e) {
         e.stopPropagation();
         e.preventDefault();
@@ -50,49 +31,37 @@ class Controller {
             let userinput = document.getElementById("result").value;
             let solution = this.calculator.solve(userinput);
             this.displaySolution(solution);
+            this.saveCalculation(userinput, solution);
         } else if (Calculator.ALLOWED_KEYS.includes(input)) {
             this.displayInput(input);
         }
     }
     
-
+    saveCalculation(userinput, solution) {
+        fetch('/services/apexrest/Calculator', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "Name": userinput,
+                "Result": solution,
+                "Types": "Calculation"
+            }),
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
     displaySolution(y) {
         document.getElementById("result").value = y;
     }
 
     clear() {
         document.getElementById("result").value = "";
-    }
-
-    /*
-     The following method is used to dynamically create a set of
-     buttons and add them to a table in the HTML document.
-    */
-
-     /*
-    createButtons() {
-        const table = document.getElementById('calc');
-        let buttonId = 0;
-        let tr = document.createElement('tr'); // Create the first row
-    
-        Calculator.ALLOWED_KEYS.forEach((value, index) => {
-            if (index % 4 === 0 && index !== 0) { // Change '4' to set the number of buttons per row
-                table.appendChild(tr); // Append the completed row to the table
-                tr = document.createElement('tr'); // Create a new row for next set of buttons
-            }
-    
-            const td = document.createElement('td');
-            const button = document.createElement('input');
-            button.type = 'button';
-            button.value = value;
-            button.id = `button${buttonId++}`;
-            td.appendChild(button);
-            tr.appendChild(td); 
-        });
-    
-        table.appendChild(tr); // Append the last row to the table
-    }
-    */  
+    } 
 }
 
 
