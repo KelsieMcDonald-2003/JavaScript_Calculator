@@ -3,6 +3,7 @@ import '../css/calculator.css';
 import {directions} from './directions.js';
 import {Calculator} from '../../node_modules/@ocdla/calculator/js/Calculator.js';
 import {vNode, View} from "../../node_modules/@ocdla/view/view.js";
+import {SalesforceRestApi} from '../../node_modules/@odla/calculator/SalesforceRestApi/SalesforceRestApi.js';
 
 class Controller {
     constructor() {
@@ -12,6 +13,7 @@ class Controller {
         table.appendChild(html);
         this.calculator = new Calculator();
         this.calculator.addObserver(this);
+        this.api = new SalesforceRestApi();
         //this.createButtons();
         this.cal = document.getElementById("calc");
         this.cal.addEventListener("keyup", this);
@@ -39,7 +41,7 @@ class Controller {
     }
     
     saveCalculation(userinput, solution) {
-        fetch('/services/apexrest/Calculator', {
+        this.api.fetch('/services/apexrest/Calculator', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
