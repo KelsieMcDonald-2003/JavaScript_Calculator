@@ -3,7 +3,7 @@ import '../css/calculator.css';
 import {directions} from './directions.js';
 import {Calculator} from '../../node_modules/@ocdla/calculator/js/Calculator.js';
 import {vNode, View} from "../../node_modules/@ocdla/view/view.js";
-import {SalesforceRestApi} from '../../node_modules/@odla/calculator/SalesforceRestApi/SalesforceRestApi.js';
+import {SalesforceRestApi} from "../../node_modules/@ocdla/calculator/SalesforceRestApi/SalesforceRestApi.js";
 
 class Controller {
     constructor() {
