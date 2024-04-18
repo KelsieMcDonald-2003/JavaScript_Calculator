@@ -11,6 +11,7 @@ class Controller {
         let html = View.createElement(<CalculatorComponent />);
         table.appendChild(html);
         this.calculator = new Calculator();
+        this.calculator.addObserver(this);
         //this.createButtons();
         this.cal = document.getElementById("calc");
         this.cal.addEventListener("keyup", this);
@@ -55,15 +56,21 @@ class Controller {
             console.error('Error:', error);
         });
     }
+
     displaySolution(y) {
         document.getElementById("result").value = y;
     }
 
     clear() {
         document.getElementById("result").value = "";
-    } 
-}
+    }
 
+    update(event, data) {
+        if (event === 'calculation') {
+            this.saveCalculation(data.userinput, data.solution);
+        }
+    }
+}
 
 const CalculatorComponent = function(props) {
     return (
