@@ -25,6 +25,7 @@
 #calc input[type="button"]:hover{
     cursor:pointer;
     background-color:silver;
+    font-size: xx-large;
 }
 
 #calc input[type="button"][value="="]:hover{
