@@ -1,11 +1,20 @@
 export class SalesforceRestApi {
     constructor() {
-    }
-
-    async fetch(queryString) {
         const myHeaders = new Headers();
         const authHeader = "Bearer " + ACCESS_TOKEN; 
         myHeaders.append("Authorization", authHeader);
+    }
+
+    /*
+    This is an saynchronous method that sends a fetch request to the
+    salesforce API. It creates an authorization header using an access
+    token, sends a GET request to the Salesforce API with the provided
+    query string, and returns fetched data
+    */
+    async query(queryString) {
+        //const myHeaders = new Headers();
+        //const authHeader = "Bearer " + ACCESS_TOKEN; 
+        //myHeaders.append("Authorization", authHeader);
 
         let fetchedData;
         //query string example: query?q=SELECT+name,id+from+CourseInfo__c
@@ -14,5 +23,17 @@ export class SalesforceRestApi {
         .then(data => { fetchedData = data;});
 
         return fetchedData;
+    }
+
+    create() {
+
+    }
+
+    update() {
+
+    }
+
+    delete() {
+        
     }
 }
