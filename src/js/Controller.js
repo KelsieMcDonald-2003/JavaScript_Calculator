@@ -6,6 +6,11 @@ import {vNode, View} from "../../node_modules/@ocdla/view/view.js";
 import {SalesforceRestApi} from "../../node_modules/@ocdla/calculator/SalesforceRestApi/SalesforceRestApi.js";
 
 class Controller {
+    /*
+    This constructor method initializes the calculator, sets up event 
+    listeners for keyup and click events, and creates an instance of the
+    SalesforceRestApi
+    */
     constructor() {
         directions();
         const table = document.getElementById('calc');
@@ -20,10 +25,19 @@ class Controller {
         this.cal.addEventListener("click", this);
     }
 
+    /*
+    This method appends the input value to the "result" element in 
+    the DOM
+    */
     displayInput(input) {
         document.getElementById("result").value += input;
     }
     
+    /*
+    This method handles keyup and click events. If the input is "=", it
+    calculates the result, displays it, and saves the calculation. If the
+    input is an allowed key, it displays the input
+    */
     handleEvent(e) {
         e.stopPropagation();
         e.preventDefault();
@@ -40,6 +54,11 @@ class Controller {
         }
     }
     
+    /*
+    This method sends a POST request to the Salesforce API to save the
+    calculation. It sends the user input and the solution as part of the
+    request body.
+    */
     saveCalculation(userinput, solution) {
         this.api.fetch('/services/apexrest/Calculator', {
             method: 'POST',
@@ -59,14 +78,24 @@ class Controller {
         });
     }
 
+    /*
+    This method displays the solution in the "result" element in the DOM
+    */
     displaySolution(y) {
         document.getElementById("result").value = y;
     }
 
+    /*
+    This method clears the "result" element in the DOM
+    */
     clear() {
         document.getElementById("result").value = "";
     }
 
+    /*
+    This method saves the calculation when the 'calculation' event is
+    triggered.
+    */
     update(event, data) {
         if (event === 'calculation') {
             this.saveCalculation(data.userinput, data.solution);
