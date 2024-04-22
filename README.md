@@ -14,9 +14,15 @@
 
 ## Files
 
+<<<<<<< HEAD
 ### Controller.js
 '''
  if(input === "=" || e.keyCode === 13) {
+=======
+### Controller
+'''
+if(input === "=" || e.keyCode === 13) {
+>>>>>>> e8be17a6da73d06667f8e622c70dfc4ea055687c
             let userinput = document.getElementById("result").value;
             let solution = this.calculator.solve(userinput);
             this.displaySolution(solution);
