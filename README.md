@@ -13,7 +13,7 @@
  * The clear function clears the "result" field
 
 ## Files
-'''
+```
 if(input === "=" || e.keyCode === 13) {
             let userinput = document.getElementById("result").value;
             let solution = this.calculator.solve(userinput);
@@ -22,4 +22,4 @@ if(input === "=" || e.keyCode === 13) {
         } else if (Calculator.ALLOWED_KEYS.includes(input)) {
             this.displayInput(input);
         }
-'''
+```
