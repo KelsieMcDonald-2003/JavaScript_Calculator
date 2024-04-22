@@ -15,11 +15,13 @@
 ## Files
 
 ### Controller
-'''if(input === "=" || e.keyCode === 13) {
+'''
+if(input === "=" || e.keyCode === 13) {
             let userinput = document.getElementById("result").value;
             let solution = this.calculator.solve(userinput);
             this.displaySolution(solution);
             this.saveCalculation(userinput, solution);
         } else if (Calculator.ALLOWED_KEYS.includes(input)) {
             this.displayInput(input);
-        }'''
+        }
+'''
