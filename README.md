@@ -15,13 +15,8 @@
 ## Files
 
 ### Controller.js
-''' handleEvent(e) {
-        e.stopPropagation();
-        e.preventDefault();
-        let target = e.target;
-        let input = e.type == "keyup" ? e.key : e.target.value;
-    
-        if(input === "=" || e.keyCode === 13) {
+'''
+if(input === "=" || e.keyCode === 13) {
             let userinput = document.getElementById("result").value;
             let solution = this.calculator.solve(userinput);
             this.displaySolution(solution);
@@ -29,5 +24,4 @@
         } else if (Calculator.ALLOWED_KEYS.includes(input)) {
             this.displayInput(input);
         }
-    }
 '''
