@@ -13,6 +13,8 @@
  * The clear function clears the "result" field
 
 ## Files
+### Controller.js
+
 ```
 if(input === "=" || e.keyCode === 13) {
             let userinput = document.getElementById("result").value;
@@ -23,3 +25,5 @@ if(input === "=" || e.keyCode === 13) {
             this.displayInput(input);
         }
 ```
+
+The code above executes if the input is an equal sign, or the Enter key is pressed (keyCode 13). It gets the user input from an element with the id "result", calculates the solution using ```this.calculator.solve(userinput)``` method, displays the solution, and saves the calculation.
