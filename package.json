@@ -15,7 +15,7 @@
         "@babel/preset-env": "^7.19.1",
         "@babel/preset-react": "^7.14.5",
         "@ocdla/calculator": "file:dev_modules/@ocdla/calculator",
-        "@ocdla/view": "~2.3.0",
+        "@ocdla/view": "~2.3.3",
         "clean-webpack-plugin": "^4.0.0",
         "copy-webpack-plugin": "^11.0.0",
         "css-loader": "^6.8.1",
@@ -36,7 +36,7 @@
         "webpack-merge": "^5.8.0"
     },
     "dependencies": {
-        "@ocdla/view": "~2.3.0",
+        "@ocdla/view": "~2.3.3",
         "babel-loader": "^8.2.5",
         "bootstrap": "^5.2.1",
         "bootstrap-less": "^3.3.8",
