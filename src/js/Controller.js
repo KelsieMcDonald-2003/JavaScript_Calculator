@@ -49,7 +49,7 @@ class Controller {
 
     
     saveCalculation(userinput, solution) {
-        this.api.fetch('/services/apexrest/Calculator', {
+        this.api.query('/services/apexrest/Calculator', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
