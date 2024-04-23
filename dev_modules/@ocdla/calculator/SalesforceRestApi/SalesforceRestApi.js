@@ -1,7 +1,7 @@
 export class SalesforceRestApi {
-    constructor() {
+    constructor(accessToken) {
         const myHeaders = new Headers();
-        const authHeader = "Bearer " + ACCESS_TOKEN; 
+        const authHeader = "Bearer " + accessToken; 
         myHeaders.append("Authorization", authHeader);
     }
 
