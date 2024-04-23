@@ -79,5 +79,12 @@ clear() {
 
 ## Photos
 ![A photo of what the calculator looks like.](src/photos/calculator1.png)
+
+The photo above is a generalization of the layout of my calculator.
+
+The photo below shows where the values go once a button is clicked (All but the ```=``` button).
+
 ![A photo of the buttons working.](src/photos/calculator2.png)
+
+The photo below shows the solution of the previous image. It shows where the solution goes.
 ![The solution of the solution working.](src/photos/calculator3.png)
