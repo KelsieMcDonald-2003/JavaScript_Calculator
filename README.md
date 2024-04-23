@@ -12,7 +12,7 @@
  * The solve function evaluates the expression in the "result" field and updates it with the result
  * The clear function clears the "result" field
 
-## Files
+## Code Examples
 ### Controller.js
 
 ```
@@ -27,3 +27,32 @@ if(input === "=" || e.keyCode === 13) {
 ```
 
 The code above executes if the input is an equal sign, or the Enter key is pressed (keyCode 13). It gets the user input from an element with the id "result", calculates the solution using ```this.calculator.solve(userinput)``` method, displays the solution, and saves the calculation.
+
+The code below uses JSX to create the buttons that user's can click, using their mouse or fingers.
+```
+const CalculatorComponent = function(props) {
+    return (
+        <div id="calculator">
+
+            <table id="calc">
+                <tbody>
+                    <tr>
+                        <td colspan="3">
+                            <input type="text" id="result" placeholder="Enter Numbers" />
+                        </td>
+                        <td>
+                            <input id="clear" type="button" value="C" onclick={() => window.controller.clear()} />
+                        </td>
+                    </tr>
+                    <ButtonGroup keys="1,2,3,+" />
+                    <ButtonGroup keys="4,5,6,-" />
+                    <ButtonGroup keys="7,8,9,*" />
+                    <ButtonGroup keys="(,0,),." />
+                    <ButtonGroup keys="/,%,^,=" />
+                </tbody>
+            </table>
+
+        </div>
+    );
+};
+```
