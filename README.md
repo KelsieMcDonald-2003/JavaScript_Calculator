@@ -78,6 +78,6 @@ clear() {
 ```
 
 ## Photos
-!(src/photos/calculator1.png)
-!(src/photos/calculator2.png)
-!(src/photos/calculator3.png)
+![A photo of what the calculator looks like.](src/photos/calculator1.png)
+![A photo of the buttons working.](src/photos/calculator2.png)
+![The solution of the solution working.](src/photos/calculator3.png)
