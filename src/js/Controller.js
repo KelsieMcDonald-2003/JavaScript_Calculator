@@ -3,7 +3,8 @@ import '../css/calculator.css';
 import {directions} from './directions.js';
 import {Calculator} from '../../node_modules/@ocdla/calculator/js/Calculator.js';
 import {vNode, View} from "../../node_modules/@ocdla/view/view.js";
-import {SalesforceRestApi} from "../../node_modules/@ocdla/calculator/SalesforceRestApi/SalesforceRestApi.js";
+import {SalesforceRestApi} from '../../node_modules/@ocdla/calculator/SalesforceRestApi/SalesforceRestApi.js';
+
 
 class Controller {
     /**
@@ -16,11 +17,10 @@ class Controller {
         let html = View.createElement(<CalculatorComponent />);
         table.appendChild(html);
         this.calculator = new Calculator();
-        this.calculator.addObserver(this);
-        this.api = new SalesforceRestApi();
         this.cal = document.getElementById("calc");
         this.cal.addEventListener("keyup", this);
         this.cal.addEventListener("click", this);
+        this.api = new SalesforceRestApi(ACCESS_TOKEN);
     }
 
     /**
@@ -51,13 +51,17 @@ class Controller {
         }
     }
     
-    /**
-    * Sends a POST request to save the calculation.
-    * @param {string} userinput - The user's input for the calculation.
-    * @param {string} solution - The result of the calculation.
-    */
+    displaySolution(y) {
+        document.getElementById("result").value = y;
+    }
+
+    clear() {
+        document.getElementById("result").value = "";
+    }
+
+    
     saveCalculation(userinput, solution) {
-        this.api.fetch('/services/apexrest/Calculator', {
+        this.api.query('/services/apexrest/Calculator', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -74,32 +78,13 @@ class Controller {
             console.error('Error:', error);
         });
     }
-
-    /**
-     * This method displays the solution in the "result" element in the DOM
-     * @param {number} solution - the solution to be displayed.
-     */
-    displaySolution(y) {
-        document.getElementById("result").value = y;
-    }
-
-    /**
-     * This method clears the "result" element in the DOM
-     */
-    clear() {
-        document.getElementById("result").value = "";
-    }
-
-    /**
-     * Updates the component based on the event
-     * @param {string} event - The event that occured
-     * @param {Object} data - The data associated with the event
-     */
+    
     update(event, data) {
         if (event === 'calculation') {
             this.saveCalculation(data.userinput, data.solution);
         }
     }
+    
 }
 
 /**

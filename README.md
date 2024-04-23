@@ -28,7 +28,8 @@ if(input === "=" || e.keyCode === 13) {
 
 The code above executes if the input is an equal sign, or the Enter key is pressed (keyCode 13). It gets the user input from an element with the id "result", calculates the solution using ```this.calculator.solve(userinput)``` method, displays the solution, and saves the calculation.
 
-The code below uses JSX to create the buttons that user's can click, using their mouse or fingers.
+
+The code below is a React component named ```CalculatorComponent```. This component renders a calculator interface in HTML: 
 ```
 const CalculatorComponent = function(props) {
     return (
@@ -56,3 +57,34 @@ const CalculatorComponent = function(props) {
     );
 };
 ```
+
+### calculator.js
+
+```
+solve(x) {
+   this.notifyObservers('calculation', {userinput: x, solution: result});
+   return math.evalutate
+}
+```
+
+The method above performs calculations and notifies the observers of the result.
+
+While the method below clears the value of an HTML element with the id "result". It's used to clear the calculator's display/input field.
+
+```
+clear() {
+   document.getElementById("result").value="";
+}
+```
+
+## Photos
+The photo below is a generalization of the layout of my calculator.
+![A photo of what the calculator looks like.](src/photos/calculator1.png)
+
+
+The photo below shows where the values go once a button is clicked (All but the ```=``` button).
+
+![A photo of the buttons working.](src/photos/calculator2.png)
+
+The photo below shows the solution of the previous image. It shows where the solution goes.
+![The solution of the solution working.](src/photos/calculator3.png)
