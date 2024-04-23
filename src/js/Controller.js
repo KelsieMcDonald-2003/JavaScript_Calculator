@@ -13,8 +13,7 @@ class Controller {
     constructor() {
         directions();
         const table = document.getElementById('calc');
-        this.handleEvent = this.handleEvent.bind(this);
-        let html = View.createElement(<CalculatorComponent handleEvent={this.handleEvent} />);
+        let html = View.createElement(<CalculatorComponent />);
         table.appendChild(html);
         this.calculator = new Calculator();
         this.calculator.addObserver(this);
@@ -118,14 +117,14 @@ const CalculatorComponent = function(props) {
                             <input type="text" id="result" placeholder="Enter Numbers" />
                         </td>
                         <td>
-                            <input id="clear" type="button" value="C" onClick={() => window.controller.clear()} />
+                            <input id="clear" type="button" value="C" />
                         </td>
                     </tr>
-                    <ButtonGroup keys="1,2,3,+" handleEvent={props.handleEvent} />
-                    <ButtonGroup keys="4,5,6,-" handleEvent={props.handleEvent} />
-                    <ButtonGroup keys="7,8,9,*" handleEvent={props.handleEvent} />
-                    <ButtonGroup keys="(,0,),." handleEvent={props.handleEvent} />
-                    <ButtonGroup keys="/,%,^,=" handleEvent={props.handleEvent} />
+                    <ButtonGroup keys="1,2,3,+" />
+                    <ButtonGroup keys="4,5,6,-" />
+                    <ButtonGroup keys="7,8,9,*" />
+                    <ButtonGroup keys="(,0,),." />
+                    <ButtonGroup keys="/,%,^,=" />
                 </tbody>
             </table>
         </div>
@@ -137,7 +136,7 @@ const ButtonGroup = function(props) {
     return (
         <tr>
             {keys.map((key) => {
-                return <td><input type = "button" value = {key} onClick={props.handleEvent} /></td>;
+                return <td><input type = "button" value = {key} /></td>;
             })}
         </tr>
     );
