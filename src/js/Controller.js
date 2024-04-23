@@ -3,7 +3,7 @@ import '../css/calculator.css';
 import {directions} from './directions.js';
 import {Calculator} from '../../node_modules/@ocdla/calculator/js/Calculator.js';
 import {vNode, View} from "../../node_modules/@ocdla/view/view.js";
-//import {SalesforceRestApi} from '../../node_modules/@ocdla/calculator/SalesforceRestApi/SalesforceRestApi.js';
+import {SalesforceRestApi} from '../../node_modules/@ocdla/calculator/SalesforceRestApi/SalesforceRestApi.js';
 
 class Controller {
     constructor() {
@@ -15,7 +15,7 @@ class Controller {
         this.cal = document.getElementById("calc");
         this.cal.addEventListener("keyup", this);
         this.cal.addEventListener("click", this);
-        //this.api = new SalesforceRestApi();
+        this.api = new SalesforceRestApi(ACCESS_TOKEN);
     }
 
     displayInput(input) {
@@ -46,7 +46,7 @@ class Controller {
         document.getElementById("result").value = "";
     }
 
-    /*
+    
     saveCalculation(userinput, solution) {
         this.api.fetch('/services/apexrest/Calculator', {
             method: 'POST',
@@ -65,13 +65,13 @@ class Controller {
             console.error('Error:', error);
         });
     }
-
+    
     update(event, data) {
         if (event === 'calculation') {
             this.saveCalculation(data.userinput, data.solution);
         }
     }
-    */
+    
 }
 
 
