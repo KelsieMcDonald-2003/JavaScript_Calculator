@@ -5,12 +5,6 @@ export class SalesforceRestApi {
         myHeaders.append("Authorization", authHeader);
     }
 
-    /*
-    This is an saynchronous method that sends a fetch request to the
-    salesforce API. It creates an authorization header using an access
-    token, sends a GET request to the Salesforce API with the provided
-    query string, and returns fetched data
-    */
     async query(queryString) {
         //const myHeaders = new Headers();
         //const authHeader = "Bearer " + ACCESS_TOKEN; 
@@ -25,15 +19,29 @@ export class SalesforceRestApi {
         return fetchedData;
     }
 
-    create() {
-
+    async create(objectName, data) {
+        const response = await fetch(`${INSTANCE_URL}/services/data/v60.0/sobjects/${objectName}`, {
+            method: 'POST',
+            headers: this.myHeaders,
+            body: JSON.stringify(data)
+        });
+        return response.json();
     }
 
-    update() {
-
+    async update(objectName, id, data) {
+        const response = await fetch(`${INSTANCE_URL}/services/data/v60.0/sobjects/${objectName}/${id}`, {
+            method: 'PATCH',
+            headers: this.myHeaders,
+            body: JSON.stringify(data)
+        });
+        return response.json();
     }
 
-    delete() {
-        
+    async delete(objectName, id) {
+        const response = await fetch(`${INSTANCE_URL}/services/data/v60.0/sobjects/${objectName}/${id}`, {
+            method: 'DELETE',
+            headers: this.myHeaders
+        });
+        return response.json();
     }
 }
