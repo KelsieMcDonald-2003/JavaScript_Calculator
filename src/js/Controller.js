@@ -19,8 +19,8 @@ class Controller {
         this.calculator.addObserver(this);
         this.api = new SalesforceRestApi();
         this.cal = document.getElementById("calc");
-        this.cal.addEventListener("keyup", this.handleEvent);
-        this.cal.addEventListener("click", this.handleEvent);
+        this.cal.addEventListener("keyup", this);
+        this.cal.addEventListener("click", this);
     }
 
     /**
@@ -39,7 +39,7 @@ class Controller {
         e.stopPropagation();
         e.preventDefault();
         let target = e.target;
-        let input = e.type == "keyup" ? e.key : e.target.value;
+        let input = e.type == "keyup" ? e.key : (e.detail || e.target.value);
     
         if(input === "=" || e.keyCode === 13) {
             let userinput = document.getElementById("result").value;
@@ -117,7 +117,7 @@ const CalculatorComponent = function(props) {
                             <input type="text" id="result" placeholder="Enter Numbers" />
                         </td>
                         <td>
-                            <input id="clear" type="button" value="C" />
+                            <input id="clear" type="button" value="C" onclick={() => window.controller.clear()}/>
                         </td>
                     </tr>
                     <ButtonGroup keys="1,2,3,+" />
@@ -136,7 +136,7 @@ const ButtonGroup = function(props) {
     return (
         <tr>
             {keys.map((key) => {
-                return <td><input type = "button" value = {key} /></td>;
+                return <td><input type = "button" value = {key} onclick={() => window.controller.handleEvent(new CustomEvent('click', {detail: key}))} /></td>;
             })}
         </tr>
     );
