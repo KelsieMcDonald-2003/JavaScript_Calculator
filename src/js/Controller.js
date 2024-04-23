@@ -5,6 +5,7 @@ import {Calculator} from '../../node_modules/@ocdla/calculator/js/Calculator.js'
 import {vNode, View} from "../../node_modules/@ocdla/view/view.js";
 import {SalesforceRestApi} from '../../node_modules/@ocdla/calculator/SalesforceRestApi/SalesforceRestApi.js';
 
+
 class Controller {
     constructor() {
         directions();
