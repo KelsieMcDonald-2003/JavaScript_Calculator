@@ -6,38 +6,36 @@ import {vNode, View} from "../../node_modules/@ocdla/view/view.js";
 import {SalesforceRestApi} from "../../node_modules/@ocdla/calculator/SalesforceRestApi/SalesforceRestApi.js";
 
 class Controller {
-    /*
-    This constructor method initializes the calculator, sets up event 
-    listeners for keyup and click events, and creates an instance of the
-    SalesforceRestApi
-    */
+    /**
+     * Constructs new instance of the class and sets up the 
+     * calculator UI
+     */
     constructor() {
         directions();
         const table = document.getElementById('calc');
-        let html = View.createElement(<CalculatorComponent />);
+        this.handleEvent = this.handleEvent.bind(this);
+        let html = View.createElement(<CalculatorComponent handleEvent={this.handleEvent} />);
         table.appendChild(html);
         this.calculator = new Calculator();
         this.calculator.addObserver(this);
         this.api = new SalesforceRestApi();
-        //this.createButtons();
         this.cal = document.getElementById("calc");
-        this.cal.addEventListener("keyup", this);
-        this.cal.addEventListener("click", this);
+        this.cal.addEventListener("keyup", this.handleEvent);
+        this.cal.addEventListener("click", this.handleEvent);
     }
 
-    /*
-    This method appends the input value to the "result" element in 
-    the DOM
-    */
+    /**
+     * Appends the given input to the calculator's display
+     * @param {*} input - The input to display
+     */
     displayInput(input) {
         document.getElementById("result").value += input;
     }
     
-    /*
-    This method handles keyup and click events. If the input is "=", it
-    calculates the result, displays it, and saves the calculation. If the
-    input is an allowed key, it displays the input
-    */
+    /**
+     * Handles keyup and click events on the calculator
+     * @param {Event} e - The event to handle 
+     */
     handleEvent(e) {
         e.stopPropagation();
         e.preventDefault();
@@ -54,10 +52,10 @@ class Controller {
         }
     }
     
-    /*
-    This method sends a POST request to the Salesforce API to save the
-    calculation. It sends the user input and the solution as part of the
-    request body.
+    /**
+    * Sends a POST request to save the calculation.
+    * @param {string} userinput - The user's input for the calculation.
+    * @param {string} solution - The result of the calculation.
     */
     saveCalculation(userinput, solution) {
         this.api.fetch('/services/apexrest/Calculator', {
@@ -78,24 +76,26 @@ class Controller {
         });
     }
 
-    /*
-    This method displays the solution in the "result" element in the DOM
-    */
+    /**
+     * This method displays the solution in the "result" element in the DOM
+     * @param {number} solution - the solution to be displayed.
+     */
     displaySolution(y) {
         document.getElementById("result").value = y;
     }
 
-    /*
-    This method clears the "result" element in the DOM
-    */
+    /**
+     * This method clears the "result" element in the DOM
+     */
     clear() {
         document.getElementById("result").value = "";
     }
 
-    /*
-    This method saves the calculation when the 'calculation' event is
-    triggered.
-    */
+    /**
+     * Updates the component based on the event
+     * @param {string} event - The event that occured
+     * @param {Object} data - The data associated with the event
+     */
     update(event, data) {
         if (event === 'calculation') {
             this.saveCalculation(data.userinput, data.solution);
@@ -103,10 +103,14 @@ class Controller {
     }
 }
 
+/**
+ * A functional component that renders the calculator
+ * @param {Object} props - The properties passed to the component
+ * @returns {JSX.Element} - The rendered calculator component
+ */
 const CalculatorComponent = function(props) {
     return (
         <div id="calculator">
-
             <table id="calc">
                 <tbody>
                     <tr>
@@ -114,34 +118,29 @@ const CalculatorComponent = function(props) {
                             <input type="text" id="result" placeholder="Enter Numbers" />
                         </td>
                         <td>
-                            <input id="clear" type="button" value="C" onclick={() => window.controller.clear()} />
+                            <input id="clear" type="button" value="C" onClick={() => window.controller.clear()} />
                         </td>
                     </tr>
-                    <ButtonGroup keys="1,2,3,+" />
-                    <ButtonGroup keys="4,5,6,-" />
-                    <ButtonGroup keys="7,8,9,*" />
-                    <ButtonGroup keys="(,0,),." />
-                    <ButtonGroup keys="/,%,^,=" />
+                    <ButtonGroup keys="1,2,3,+" handleEvent={props.handleEvent} />
+                    <ButtonGroup keys="4,5,6,-" handleEvent={props.handleEvent} />
+                    <ButtonGroup keys="7,8,9,*" handleEvent={props.handleEvent} />
+                    <ButtonGroup keys="(,0,),." handleEvent={props.handleEvent} />
+                    <ButtonGroup keys="/,%,^,=" handleEvent={props.handleEvent} />
                 </tbody>
             </table>
-
         </div>
     );
 };
 
 const ButtonGroup = function(props) {
-
-    // convert string of keys to an array of characters.
     let keys = props.keys.split(",");
-
     return (
         <tr>
             {keys.map((key) => {
-                return <td><input type="button" value={key} /></td>;
+                return <td><input type = "button" value = {key} onClick={props.handleEvent} /></td>;
             })}
         </tr>
     );
-
 };
 
 window.onload = () => {
