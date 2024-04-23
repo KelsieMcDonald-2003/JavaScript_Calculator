@@ -25,4 +25,3 @@ export class Calculator {
     }
 }
 
-//export default Calculator;
