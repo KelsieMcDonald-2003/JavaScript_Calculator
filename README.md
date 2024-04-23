@@ -78,9 +78,9 @@ clear() {
 ```
 
 ## Photos
+The photo below is a generalization of the layout of my calculator.
 ![A photo of what the calculator looks like.](src/photos/calculator1.png)
 
-The photo above is a generalization of the layout of my calculator.
 
 The photo below shows where the values go once a button is clicked (All but the ```=``` button).
 
