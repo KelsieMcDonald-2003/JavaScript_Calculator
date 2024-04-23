@@ -5,6 +5,7 @@
 
 scratch/
 dist/
+.env
 
 # User-specific files
 *.rsuser
