@@ -3,6 +3,7 @@ import '../css/calculator.css';
 import {directions} from './directions.js';
 import {Calculator} from '../../node_modules/@ocdla/calculator/js/Calculator.js';
 import {vNode, View} from "../../node_modules/@ocdla/view/view.js";
+//import {SalesforceRestApi} from '../../node_modules/@ocdla/calculator/SalesforceRestApi/SalesforceRestApi.js';
 
 class Controller {
     constructor() {
@@ -11,10 +12,10 @@ class Controller {
         let html = View.createElement(<CalculatorComponent />);
         table.appendChild(html);
         this.calculator = new Calculator();
-        //this.createButtons();
         this.cal = document.getElementById("calc");
         this.cal.addEventListener("keyup", this);
         this.cal.addEventListener("click", this);
+        //this.api = new SalesforceRestApi();
     }
 
     displayInput(input) {
@@ -37,8 +38,17 @@ class Controller {
         }
     }
     
+    displaySolution(y) {
+        document.getElementById("result").value = y;
+    }
+
+    clear() {
+        document.getElementById("result").value = "";
+    }
+
+    /*
     saveCalculation(userinput, solution) {
-        fetch('/services/apexrest/Calculator', {
+        this.api.fetch('/services/apexrest/Calculator', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -55,13 +65,13 @@ class Controller {
             console.error('Error:', error);
         });
     }
-    displaySolution(y) {
-        document.getElementById("result").value = y;
-    }
 
-    clear() {
-        document.getElementById("result").value = "";
-    } 
+    update(event, data) {
+        if (event === 'calculation') {
+            this.saveCalculation(data.userinput, data.solution);
+        }
+    }
+    */
 }
 
 
