@@ -85,6 +85,7 @@ module.exports = {
     new webpack.DefinePlugin({
       NODE_ENV: JSON.stringify(process.env.NODE_ENV),
       APIKEY: JSON.stringify(process.env.APIKEY),
+      SERVER_URL: JSON.stringify
     }),
     new MiniCssExtractPlugin({
       filename: fileNamePrefix + "[name].css",
