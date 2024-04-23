@@ -14,8 +14,8 @@ class Controller {
     constructor() {
         directions();
         const table = document.getElementById('calc');
-        let html = View.createElement(<CalculatorComponent />);
-        table.appendChild(html);
+        this.html = View.createRoot('#calc');
+        this.html.render(<CalculatorComponent />);
         this.calculator = new Calculator();
         this.cal = document.getElementById("calc");
         this.cal.addEventListener("keyup", this);
