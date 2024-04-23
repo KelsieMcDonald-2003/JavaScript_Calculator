@@ -12,18 +12,72 @@
  * The solve function evaluates the expression in the "result" field and updates it with the result
  * The clear function clears the "result" field
 
-### Methods
-* constructor():
-  - is called when an object of the Calculator class is created
-  - Initializes the cal property with the calculator element from the HTML and sets up an event listener for key presses
-* handleKeyPress(event):
-  - This method is triggered when a key is pressed
-  - It checks if the key pressed is a number or an operator and if so, it calls the displayValues method with the key as an argument
-  - If the ‘Enter’ key is pressed, it calls the solve method
-*  displayValues(val):
-   - This method is used to display the values entered or calculated. It takes a value as an argument and appends it to the current value in the result input field.
-*  solve():
-   - This method is used to calculate the result of the expression entered
-   - It gets the expression from the result input field, evaluates it using the math.evaluate function from the mathjs library, and then displays the result in the result input field
-*  clear():
-   - This method is used to clear the result input field. It sets the value of the result input field to an empty string
+## Code Examples
+### Controller.js
+
+```
+if(input === "=" || e.keyCode === 13) {
+            let userinput = document.getElementById("result").value;
+            let solution = this.calculator.solve(userinput);
+            this.displaySolution(solution);
+            this.saveCalculation(userinput, solution);
+        } else if (Calculator.ALLOWED_KEYS.includes(input)) {
+            this.displayInput(input);
+        }
+```
+
+The code above executes if the input is an equal sign, or the Enter key is pressed (keyCode 13). It gets the user input from an element with the id "result", calculates the solution using ```this.calculator.solve(userinput)``` method, displays the solution, and saves the calculation.
+
+
+The code below is a React component named ```CalculatorComponent```. This component renders a calculator interface in HTML: 
+```
+const CalculatorComponent = function(props) {
+    return (
+        <div id="calculator">
+
+            <table id="calc">
+                <tbody>
+                    <tr>
+                        <td colspan="3">
+                            <input type="text" id="result" placeholder="Enter Numbers" />
+                        </td>
+                        <td>
+                            <input id="clear" type="button" value="C" onclick={() => window.controller.clear()} />
+                        </td>
+                    </tr>
+                    <ButtonGroup keys="1,2,3,+" />
+                    <ButtonGroup keys="4,5,6,-" />
+                    <ButtonGroup keys="7,8,9,*" />
+                    <ButtonGroup keys="(,0,),." />
+                    <ButtonGroup keys="/,%,^,=" />
+                </tbody>
+            </table>
+
+        </div>
+    );
+};
+```
+
+### calculator.js
+
+```
+solve(x) {
+   this.notifyObservers('calculation', {userinput: x, solution: result});
+   return math.evalutate
+}
+```
+
+The method above performs calculations and notifies the observers of the result.
+
+While the method below clears the value of an HTML element with the id "result". It's used to clear the calculator's display/input field.
+
+```
+clear() {
+   document.getElementById("result").value="";
+}
+```
+
+## Photos
+!(src/photos/calculator1.png)
+!(src/photos/calculator2.png)
+!(src/photos/calculator3.png)
