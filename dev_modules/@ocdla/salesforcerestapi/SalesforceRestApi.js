@@ -49,44 +49,26 @@ export class SalesforceRestApi {
 */
 
 export class SalesforceRestApi {
-    constructor(accessToken) {
-        this.myHeaders = new Headers();
-        const authHeader = "Bearer " + accessToken; 
-        this.myHeaders.append("Authorization", authHeader);
+    constructor() {
+        //this.url = url for query for Calculator
+        //this.accessToken = access token
+        //this.myHeaders = new Headers();
+        //this.myHeaders.append("Authorization", `Bearer $) 
     }
 
-    async query(queryString) {
-        let fetchedData;
-        await fetch(`${INSTANCE_URL}/services/data/v60.0/${queryString}`, { headers: this.myHeaders })
-        .then(response => response.json())
-        .then(data => { fetchedData = data;});
-
-        return fetchedData;
+    async query() {
+        
     }
 
-    async create(objectName, data) {
-        const response = await fetch(`${INSTANCE_URL}/services/data/v60.0/sobjects/${objectName}`, {
-            method: 'POST',
-            headers: this.myHeaders,
-            body: JSON.stringify(data)
-        });
-        return response.json();
+    async create() {
+        
     }
 
-    async update(objectName, id, data) {
-        const response = await fetch(`${INSTANCE_URL}/services/data/v60.0/sobjects/${objectName}/${id}`, {
-            method: 'PATCH',
-            headers: this.myHeaders,
-            body: JSON.stringify(data)
-        });
-        return response.json();
+    async update() {
+        
     }
 
-    async delete(objectName, id) {
-        const response = await fetch(`${INSTANCE_URL}/services/data/v60.0/sobjects/${objectName}/${id}`, {
-            method: 'DELETE',
-            headers: this.myHeaders
-        });
-        return response.json();
+    async delete() {
+        
     }
 }
