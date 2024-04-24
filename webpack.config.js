@@ -17,7 +17,8 @@ module.exports = {
     main: './src/js/main.js',
     directions: './src/js/directions.js',
     calculator: './node_modules/@ocdla/calculator/js/Calculator.js',
-    controller: './src/js/Controller.js'
+    controller: './src/js/Controller.js',
+    salesforce: './node_modules/@ocdla/SalesforceRestApi/SalesforceRestApi.js'
   },
   output: {
     path: path.resolve(__dirname, "dist"),
