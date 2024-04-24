@@ -59,7 +59,6 @@ class Controller {
         document.getElementById("result").value = "";
     }
 
-    
     saveCalculation(userinput, solution) {
         this.api.query('/services/apexrest/Calculator', {
             method: 'POST',
@@ -84,7 +83,6 @@ class Controller {
             this.saveCalculation(data.userinput, data.solution);
         }
     }
-    
 }
 
 /**
