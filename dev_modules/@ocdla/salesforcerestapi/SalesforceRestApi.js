@@ -58,7 +58,7 @@ export class SalesforceRestApi {
 
     static BASE_URL = '/services/data/' + SalesforceRestApi.API_VERSION + '/';
 
-    constructor(instanceURL, accessToken) {
+    constructor(instanceUrl, accessToken) {
         this.instanceUrl = instanceUrl;
         this.accessToken = accessToken;
         this.headers = new Headers();
