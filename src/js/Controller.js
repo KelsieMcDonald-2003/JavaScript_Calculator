@@ -59,6 +59,7 @@ class Controller {
         document.getElementById("result").value = "";
     }
 
+    /*
     saveCalculation(userinput, solution) {
         this.api.query('/services/apexrest/Calculator', {
             method: 'POST',
@@ -71,6 +72,21 @@ class Controller {
                 "Types": "Calculation"
             }),
         })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+    */
+
+    saveCalculation(userinput, solution) {
+        let calculation = {
+            "Name": userinput,
+            "Result__c": solution,
+            "Types__c": "Calculation"
+        };
+        this.api.createCalculation(calculation)
         .then(response => response.json())
         .then(data => console.log(data))
         .catch((error) => {

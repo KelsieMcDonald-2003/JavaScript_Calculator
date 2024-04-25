@@ -49,26 +49,68 @@ export class SalesforceRestApi {
 */
 
 export class SalesforceRestApi {
-    constructor() {
-        //this.url = url for query for Calculator
-        //this.accessToken = access token
-        //this.myHeaders = new Headers();
-        //this.myHeaders.append("Authorization", `Bearer $) 
+    instanceUrl;
+    accessToken;
+    method;
+    body;
+
+    static API_VERSION = 'v60.0'
+
+    static BASE_URL = '/services/data/' + SalesforceRestApi.API_VERSION + '/';
+
+    constructor(instanceURL, accessToken) {
+        this.instanceUrl = instanceUrl;
+        this.accessToken = accessToken;
+        this.headers = new Headers();
+        this.authHeader = "Bearer " + this.accessToken;
+        this.headers.append("Authorization", this.authHeader);
+        this.headers.append('Content-Type', 'application/json');
     }
 
-    async query() {
-        
+    query(queryString) {
+        this.method = 'GET';
+        this.path = SalesforceRestApi.BASE_URL + 'query?=' + queryString;
+        return this.send(); // Keep? Remove? Change?
     }
 
-    async create() {
-        
+    update(objectName, record) {
+        this.method = 'PATCH';
+        this.path = SalesforceRestApi.BASE_URL + 'sobjects/' + objectName + `/${record.id}`;
+        this.body = JSON.stringify(record);
+
+        return this.send();
     }
 
-    async update() {
-        
+    delete(objectName, record) {
+        this.method = 'DELETE';
+        this.path = SalesforceRestApi.BASE_URL + 'sobjects/' + objectName + `/${record.id}`
     }
 
-    async delete() {
-        
+    send() {
+        let config = {
+            method: this.method,
+            headers: this.headers
+        };
+
+        if (this.method != 'GET' && this.method != 'DELETE') {
+            config.body = this.body;
+        }
+
+        return fetch(`${this.instanceUrl}${this.path}`, config)
+        .then(resp => {
+            let json = resp.json();
+            return json;
+        })
+        .catch((err) => {
+            console.error('Error:', err);
+        });
     }
+
+    createCalculation(record) {
+        this.method = 'POST';
+        this.path = SalesforceRestApi.BASE_URL + 'sobjects/Calculator__c'; 
+        this.body = JSON.stringify(record);
+    
+        return this.send();
+    }    
 }
